@@ -13,7 +13,7 @@ import router from './router';
     	$('.fa-close').hide();
     	$('.site-nav-item-branding').fadeOut(100);
     	$('.site-nav-item-description').fadeOut(100);
-    	$('.site-nav-item:nth-child(2)').css({'width': '1.5%'});	
+    	$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});	
     })
 
     $('.site-nav-item:nth-child(2)').on('mouseenter', function() {
