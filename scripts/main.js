@@ -7,16 +7,15 @@ import router from './router';
 
   	Backbone.history.start();
 
-    $('body').prepend(JST.application());
-
-    $('.fa-close').on('click', function() {
+    $(document).on('click', '.fa-close', function() {
+    	console.log('close');
     	$('.fa-close').hide();
     	$('.site-nav-item-branding').fadeOut(100);
     	$('.site-nav-item-description').fadeOut(100);
     	$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});	
-    })
+    });
 
-    $('.site-nav-item:nth-child(2)').on('mouseenter', function() {
+    $(document).on('mouseenter', '.site-nav-item:nth-child(2)', function() {
     	if ($('.site-nav-item:nth-child(2)').width() < 100) {
     		$('.site-nav-item:nth-child(2)').css({'width': '100%'});
     		$('.fa-close').fadeIn(1000);
@@ -26,4 +25,5 @@ import router from './router';
     })
 
   });
+
 })();

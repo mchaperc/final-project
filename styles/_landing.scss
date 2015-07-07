@@ -1,20 +1,24 @@
 .site-nav {
-	background-image: url('http://www.alegoo.com/images06/travel/maps-01/021/street-map-11.gif');
+	// background-image: url('http://www.alegoo.com/images06/travel/maps-01/021/street-map-11.gif');
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 100%;
 	left: 0;
+	pointer-events: none;
 	position: absolute;
 	top: 0;
 	width: 100%;
+	z-index: 2;
 }
 
 .site-nav-item {
 	display: block;
 	height: 16.66%;
+	pointer-events: visible;
 	position: relative;
 	transition: all 1s ease;
 	width: 2.5%;
+	z-index: 100;
 }
 
 .site-nav-item:first-child {
@@ -43,7 +47,6 @@
 }
 
 .site-nav-item:hover {
-	// box-shadow: 0 2px 5px rgba(0,0,0,.3);
 	transition: all .3s ease;
 	width: 100%;
 }
