@@ -1,15 +1,26 @@
 @import '../bower_components/bourbon/app/assets/stylesheets/bourbon';
 @import '../bower_components/neat/app/assets/stylesheets/neat';
 
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
 // Typography
 $base-font-family: $helvetica;
 
 // Colors
-$blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
 $very-light-gray: #fafafa;
+$pink: rgba(213, 96, 184,.9);
+$orange: rgba(229, 150, 36,.9);
+$green: rgba(73, 174, 69,.9);
+$purple: rgba(81, 34, 131,.9);
+$yellow: rgba(240, 206, 47,.9);
+$blue: rgba(22, 136, 222,.9);
+$red: rgba(194, 29, 35,.9);
 
 $base-font-color: $dark-gray;
 $base-background-color: $very-light-gray;
@@ -18,4 +29,313 @@ body {
   font-family: $base-font-family;
   background-color: $base-background-color;
   color: $base-font-color;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+	height: 100%;
+	width: 100%;
+}
+
+.app img {
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.site-nav {
+	background-image: url('http://www.alegoo.com/images06/travel/maps-01/021/street-map-11.gif');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.site-nav-item {
+	display: block;
+	height: 16.66%;
+	transition: all 1s ease;
+	width: 1.5%;
+}
+
+.site-nav-item:first-child {
+	background-color: $pink;
+}
+
+.site-nav-item:nth-child(2) {
+	background-color: $orange;
+	width: 100%;
+}
+
+.site-nav-item:nth-child(3) {
+	background-color: $green;
+}
+
+.site-nav-item:nth-child(4) {
+	background-color: $purple;
+}
+
+.site-nav-item:nth-child(5) {
+	background-color: $red;
+}
+
+.site-nav-item:last-child {
+	background-color: $blue;
+}
+
+.site-nav-item:hover {
+	// box-shadow: 0 2px 5px rgba(0,0,0,.3);
+	transition: all .3s ease;
+	width: 100%;
+}
+
+.site-nav-item-search {	
+	margin: auto;
+	opacity: 0;
+	padding: 1%;
+	text-align: center;
+	transition: opacity .3s linear;
+	width: 50%;
+}
+
+.site-nav-item-search h3 {
+	font-size: 1.2em;
+}
+
+.site-nav-item-search input {
+	border: none;
+	border-radius: 5px;
+	font-size: 1.3em;
+	margin-top: .7em;
+	padding: .3em;
+	width: 70%;
+}
+
+.site-nav-item-search-submit {
+	background-color: rgb(50,50,50);
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 1.325em;
+	padding: .3em;
+	vertical-align: bottom;
+	transition: all .2s linear;
+	width: 20%;
+}
+
+.site-nav-item-search-submit:hover {
+	background-color: black;
+	cursor: pointer;
+}
+
+.site-nav-item:first-child:hover .site-nav-item-search {
+	opacity: 1;
+}
+
+.site-nav-item .fa-close {
+	float: right;
+	font-size: 1.5em;
+	margin-right: 1%;
+	margin-top: .5%;
+}
+
+.site-nav-item .fa-close:hover {
+	cursor: pointer;
+}
+
+.site-nav-item-branding {
+	@include span-columns(4);
+	@include shift(.5);
+	display: inline-block;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.fa-graduation-cap {
+	float: left;
+	margin-top: 8%;
+}
+
+.site-nav-item-branding-text {
+	color: white;
+	font-size: 1.8em;
+	font-weight: 100;
+	padding-top: 2%;
+}
+
+.site-nav-item-description {
+	@include span-columns(6);
+	border-left: 1px solid white;
+	font-size: 3em;
+	height: 90%;
+	line-height: .7em;
+	margin-top: .5%;
+	padding-left: 2%;
+}
+
+.site-nav-item-description p:first-child {
+	font-weight: 100;
+}
+
+.site-nav-item-description p:last-child {
+	font-weight: 100;
+}
+
+.site-nav-item:nth-child(3) {
+	text-align: center;
+}
+
+.site-nav-item-filter {
+	color: white;
+	font-weight: 300;
+	font-size: 2em;
+	opacity: 0;
+	padding-top: 2%;
+	transition: opacity .3s linear;
+}
+
+.site-nav-item-filter .fa-arrows-h:hover {
+	cursor: pointer;
+}
+
+.site-nav-item:nth-child(3):hover .site-nav-item-filter {
+	opacity: 1;
+}
+
+.site-nav-item-filter-form {
+	color: white;
+	display: none;
+	font-size: 1.2em;
+	font-weight: 100;
+	margin: auto;
+	padding: 2% 0;
+	text-align: center;
+	width: 80%;
+}
+
+.site-nav-item-filter-form input {
+	border: none;
+	border-radius: 3px;
+	font-size: 1em;
+	margin-bottom: 1em;
+	padding-left: .3em;
+	width: 5%;
+}
+
+.site-nav-item-filter-form .filter-price-min-input,
+.site-nav-item-filter-form .filter-price-max-input,
+.site-nav-item-filter-form .filter-sqft-min-input,
+.site-nav-item-filter-form .filter-sqft-max-input {
+	width: 10%;
+}
+
+.filter-cancel,
+.filter-submit {
+	background-color: rgb(50,50,50);
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 1.2em;
+	transition: all .3s linear;
+	width: 15%;
+}
+
+.filter-cancel:hover,
+.filter-submit:hover {
+	background-color: black;
+	cursor: pointer;
+}
+
+.login {
+	font-size: 1.2em;
+	height: 100%;
+	margin: auto;
+	opacity: 0;
+	padding-top: .5%;
+	text-align: center;
+	transition: opacity .3s linear;
+	width: 30%;
+}
+
+.site-nav-item:nth-child(5):hover .login {
+	opacity: 1;
+}
+
+.login-heading {
+	color: white;
+	font-weight: 200;
+	margin-bottom: 5px;
+}
+
+.login input {
+	border: none;
+	display: block;
+	font-size: 1em;
+	margin: 1px auto;
+	width: 80%;
+}
+
+.login-submit {
+	background-color: white;
+	border: none;
+	color: $red;
+	font-size: 1em;
+	margin: auto;
+	width: 80%;
+}
+
+.login-submit:hover {
+	color: $blue;
+	cursor: pointer;
+}
+
+.register {
+	font-size: 1.2em;
+	height: 100%;
+	margin: auto;
+	opacity: 0;
+	padding-top: .5%;
+	text-align: center;
+	transition: opacity .3s linear;
+	width: 30%;
+}
+
+.site-nav-item:nth-child(6):hover .register {
+	opacity: 1;
+}
+
+.register-heading {
+	color: white;
+	font-weight: 200;
+	margin-bottom: 5px;
+}
+
+.register input {
+	border: none;
+	font-size: 1em;
+	margin: 1px auto;
+	padding: .2em;
+	width: 40%;
+}
+
+.register-submit {
+	background-color: white;
+	border: none;
+	color: $blue;
+	font-size: 1.2em;
+	margin: 1px auto;
+	padding: .05em;
+	transition: all .2s linear;
+	vertical-align: bottom;
+	width: 40%;
+}
+
+.register-submit:hover {
+	background-color: white;
+	color: $red;
+	cursor: pointer;
 }
