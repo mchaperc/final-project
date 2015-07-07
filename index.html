@@ -18,6 +18,7 @@
     <div class="app">
       <ul class="site-nav">
         <li class="site-nav-item">
+          <h3 class="site-nav-item-search-heading"><i class="fa fa-search"></i></h3>
           <div class="site-nav-item-search">
             <h3 class="site-nav-item-search-text">Search for homes near:</h3>
             <input type="text" placeholder="Enter an address, city, or zipcode">
@@ -37,13 +38,20 @@
           </div>
         </li>
         <li class="site-nav-item">
-          <div class="site-nav-item-filter">
-            <h3 class="site-nav-item-filter-text">Click below to filter search:</h3>
-            <i class="fa fa-arrows-h"></i>
+          <h3 class="site-nav-item-sources-heading"><i class="fa fa-book"></i></h3>
+          <div class="site-nav-item-sources">
+            <h3 class="site-nav-item-sources">Sources used for this app:</h3>
+            <ul class="site-nav-item-sources-list">
+              <li class="site-nav-item-sources-item"><a href="http://zillow.com"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40.gif" width="150" height="40" alt="Zillow Real Estate Search" /></a></li>
+              <li class="site-nav-item-sources-item"><a href="http://google.com/maps"><img src="../../img/Google-Map-Logo.jpg" width="80" height="40"></a></li>
+              <li class="site-nav-item-sources-item"><a href="http://greatschools.org"><img src="../../img/greatschools.png" width="150" height="40"></a></li>
+              <li class="site-nav-item-sources-item"><a href="http://active.com"><img src="../../img/active.gif" width="150" height="40"></a></li>
+            </ul>
           </div>
         </li>
-        <li class="site-nav-item filter-form">
-          <form class="site-nav-item-filter-form">
+        <li class="site-nav-item">
+          <h3 class="site-nav-item-filter-heading"><i class="fa fa-filter"></i></h3>
+          <form class="site-nav-item-filter">
               <label class="filter-price-label">Price:</label>
               <input type="number" class="filter-price-min-input" placeholder="min" min="0"> to <input type="number" class="filter-price-max-input" placeholder="max" min="0">
               <label class="filter-bedrooms-label">Bedrooms:</label>
@@ -57,6 +65,7 @@
             </form>
         </li>
         <li class="site-nav-item">
+          <h3 class="site-nav-item-login-heading"><i class="fa fa-user"></i></h3>
           <div class="login">
             <h3 class="login-heading">Login:</h3>
             <input type="text" class="login-email" required placeholder="Email">
@@ -65,6 +74,7 @@
           </div>
         </li>
         <li class="site-nav-item">
+          <h3 class="site-nav-item-register-heading"><i class="fa fa-user-plus"></i></h3>
           <div class="register">
             <h3 class="register-heading">Register:</h3>
             <input type="text" class="register-name" required placeholder="Name">
