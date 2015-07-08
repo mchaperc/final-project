@@ -17,18 +17,26 @@ export default Backbone.View.extend({
 
 	render: function(options) {
 		this.$el.html(this.template(this.collection.toJSON()));
+		//Once more MLS data is available, 
+		var lat = '30.098905';
+		var lng = '-95.618899';
 		var map = new GMaps({
 		  div: '#app',
-		  lat: options.myLocation.coords.latitude,
-		  lng: options.myLocation.coords.longitude
+		  lat: lat,
+		  lng: lng
 		});
+		this.renderChildren();
+	},
+
+	renderChildren: function() {
+		
 	},
 
 	submitSearch: function(e) {
 		e.preventDefault();
-		var searchAddress = $('.site-nav-item-search-address').val();
-		var searchCityState = $('.site-nav-item-search-city-state').val();
-		$('.site-nav-item-search-form input').val('');
+		var searchArea = $('.site-nav-item-search-area').val();
+		$('.site-nav-item-search-area').val('');
+		console.log(searchArea);	
 	}
 
 })
