@@ -6,6 +6,7 @@ export default Backbone.View.extend({
 
 	events: {
 		'submit .site-nav-item-search-form': 'submitSearch',
+		'submit .site-nav-item-filter': 'submitFilter'
 	},
 
 	initialize: function(options) {
@@ -33,67 +34,16 @@ export default Backbone.View.extend({
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
 				var lng = child.attributes.geo.lng;
-				console.log(child);
-				console.log(lat, lng);
 				this.areaMap.addMarker({
 					lat: lat,
 					lng: lng,
 					info: child,
 					click: function(e) {
-						alert('Clicked a marker');
+						console.log(this.info.attributes);
 					}
 				});
 			}
 		}.bind(this));
-
-		// console.log(this.collection);
-
-		// this.areaMap.addMarker({
-		// 	lat: this.collection.models[0].attributes.geo.lat,
-		// 	lng: this.collection.models[0].attributes.geo.lng,
-		// 	info: this.collection.models[0].attributes,
-		// 	click: function(e) {
-		// 		console.log(this.info);
-		// 	}
-		// })
-		// this.areaMap.addMarker({
-		// 	lat: this.collection.models[1].attributes.geo.lat,
-		// 	lng: this.collection.models[1].attributes.geo.lng,
-		// 	info: this.collection.models[1].attributes,
-		// 	click: function(e) {
-		// 		console.log(this.info);
-		// 	}
-		// })
-		// this.areaMap.addMarker({
-		// 	lat: this.collection.models[2].attributes.geo.lat,
-		// 	lng: this.collection.models[2].attributes.geo.lng,
-		// 	info: this.collection.models[2].attributes,
-		// 	click: function(e) {
-		// 		console.log(this.info);
-		// 	}
-		// })
-		// this.areaMap.addMarker({
-		// 	lat: this.collection.models[3].attributes.geo.lat,
-		// 	lng: this.collection.models[3].attributes.geo.lng,
-		// 	info: this.collection.models[3].attributes,
-		// 	click: function(e) {
-		// 		console.log(this.info);
-		// 	}
-		// })
-		// this.areaMap.addMarker({
-		// 	lat: this.collection.models[4].attributes.geo.lat,
-		// 	lng: this.collection.models[4].attributes.geo.lng,
-		// 	info: this.collection.models[4].attributes,
-		// 	click: function(e) {
-		// 		console.log(this.info);
-		// 	}
-		// })
-		// for (var i = 0; i < this.collection.models.length; i++) {
-		// 	this.areaMap.addMarker({
-		// 		lat: this.collection.models[i].attributes.geo.lat,
-		// 		lng: this.collection.models[i].attributes.geo.lng		
-		// 	})
-		// }
 
 	},
 
@@ -107,6 +57,17 @@ export default Backbone.View.extend({
 		var searchArea = $('.site-nav-item-search-area').val();
 		$('.site-nav-item-search-area').val('');
 		console.log(searchArea);	
+	},
+
+	submitFilter: function(e) {
+		e.preventDefault();
+		var minPrice = $('.filter-price-min-input').val();
+		var maxPrice = $('.filter-price-max-input').val();
+		var beds = $('.filter-bedrooms-input').val();
+		var baths = $('.filter-bathrooms-input').val();
+		var minSq = $('.filter-sqft-min-input').val();
+		var maxSq = $('.filter-sqft-max-input').val();
+		console.log(minPrice, maxPrice, beds, baths, minSq, maxSq);
 	}
 
 })
