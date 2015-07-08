@@ -36,6 +36,9 @@ body {
 }
 
 #app {
+	background-image: url('../../img/us.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
 	min-height: 705px;
 	width: 100%;
 }
