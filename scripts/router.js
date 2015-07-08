@@ -22,8 +22,11 @@ var Router = Backbone.Router.extend({
 			return position;
 		});
 		Promise.resolve(this.myLocation).then(function(value) {
-			this.LandingView = new LandingView({collection: this.homes, myLocation: value});
-			$('#app').html(this.LandingView.el);
+			this.homes.fetch().then(function(data) {
+				this.homesColl = new HomeCollection(data);
+				this.LandingView = new LandingView({collection: this.homesColl, myLocation: value});
+				$('#app').html(this.LandingView.el);
+			})
 		}.bind(this));
 	},
 
