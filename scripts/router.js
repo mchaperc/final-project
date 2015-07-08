@@ -1,5 +1,6 @@
 import LandingView from './views/landing';
-import {Home} from './models/homes';
+import {HomeCollection} from './models/homes';
+import config from './ajax-config';
 
 var Router = Backbone.Router.extend({
 
@@ -14,14 +15,14 @@ var Router = Backbone.Router.extend({
 	},
 
 	index: function() {
-		this.home = new Home();
+		this.homes = new HomeCollection();
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
 		}).then(function(position) {
 			return position;
 		});
 		Promise.resolve(this.myLocation).then(function(value) {
-			this.LandingView = new LandingView({model: this.home, myLocation: value});
+			this.LandingView = new LandingView({collection: this.homes, myLocation: value});
 			$('#app').html(this.LandingView.el);
 		}.bind(this));
 	},

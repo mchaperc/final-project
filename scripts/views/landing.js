@@ -10,11 +10,14 @@ export default Backbone.View.extend({
 
 	initialize: function(options) {
 		this.render(options);
+		this.collection.fetch().then(function(data) {
+			console.log(data);
+		});
 	},
 
 	render: function(options) {
-		this.$el.html(this.template(this.model.toJSON()));
-		new GMaps({
+		this.$el.html(this.template(this.collection.toJSON()));
+		var map = new GMaps({
 		  div: '#app',
 		  lat: options.myLocation.coords.latitude,
 		  lng: options.myLocation.coords.longitude
@@ -26,9 +29,6 @@ export default Backbone.View.extend({
 		var searchAddress = $('.site-nav-item-search-address').val();
 		var searchCityState = $('.site-nav-item-search-city-state').val();
 		$('.site-nav-item-search-form input').val('');
-		this.model.fetch({data: {address: searchAddress, citystatezip: searchCityState}}).then(function(data) {
-			console.log(data);
-		});
 	}
 
 })

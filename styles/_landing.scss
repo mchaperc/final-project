@@ -51,6 +51,11 @@
 	width: 100%;
 }
 
+.site-nav-item-sources,
+.site-nav-item-filter {
+	height: 100%;
+}
+
 .site-nav-item-search {	
 	margin-left: 25%;
 	top: 50%;
@@ -175,11 +180,16 @@
 	color: white;
 	font-size: 1.2em;
 	font-weight: 100;
+	padding-top: 1em;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 	opacity: 0;
 	transition: opacity .5s linear;
+}
+
+.site-nav-item-sources-text {
+	margin-bottom: 1em;
 }
 
 .site-nav-item:nth-child(3):hover .site-nav-item-sources {

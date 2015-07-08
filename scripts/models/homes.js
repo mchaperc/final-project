@@ -1,7 +1,7 @@
-var Home = Backbone.Model.extend({
+var HomeCollection = Backbone.Collection.extend({
 
-	urlRoot: 'http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1eu3f2oz217_23up5&'
+	url: 'https://api.simplyrets.com/properties'
 
 });
 
-export default {Home};
+export default {HomeCollection};
