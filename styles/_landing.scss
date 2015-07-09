@@ -18,7 +18,7 @@
 	position: relative;
 	transition: all 1s ease;
 	width: 2.5%;
-	z-index: 100;
+	z-index: 90;
 }
 
 .site-nav-item:first-child {
@@ -42,7 +42,7 @@
 	background-color: $red;
 }
 
-.site-nav-item:last-child {
+.site-nav-item:nth-child(6) {
 	background-color: $blue;
 }
 
@@ -380,5 +380,82 @@
 .register-submit:hover {
 	background-color: white;
 	color: $red;
+	cursor: pointer;
+}
+
+.screen {
+	background-color: rgba(0,0,0,.4);
+	height: 100%;
+	left: 0;
+	pointer-events: visible;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+}
+
+.popup {
+	background-color: rgba(250,250,250,.9);
+	border-radius: 5px;
+	position: fixed;
+	height: 70%;
+	left: 35%;
+	pointer-events: visible;
+	top: 15%;
+	width: 30%;
+	z-index: 100;
+}
+
+.popup .fa-close {
+	float: right;
+	font-size: 1.5em;
+	margin-right: 3%;
+	margin-top: 2%;
+}
+
+.popup .fa-close:hover {
+	cursor: pointer;
+}
+
+.popup h3,
+.popup h4,
+.popup p {
+	margin-bottom: .2em;
+	margin-left: 15%;
+	max-width: 70%;
+}
+
+.popup-address {
+	font-size: 1.3em;
+	margin-top: 2em;
+}
+
+.popup-price,
+.popup p {
+	margin-bottom: .2em;
+}
+
+.popup-image {
+	margin-left: 15%;
+	margin-top: 1em;
+	max-width: 70%;
+}
+
+.popup-more {
+	background-color: $blue;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	font-size: 1.2em;
+	margin-left: 30%;
+	margin-top: 2em;
+	padding: .2em;
+	text-decoration: none;
+	transition: all .2s linear;
+	width: 40%;	
+}
+
+.popup-more:hover {
+	background-color: rgba(12, 116, 202,.9);
 	cursor: pointer;
 }

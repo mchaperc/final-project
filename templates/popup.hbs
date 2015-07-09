@@ -1,0 +1,10 @@
+<div class="popup">
+    <i class="fa fa-close"></i>
+    <h3 class="popup-address">{{this.address.full}}<br>{{this.address.city}}, TX</h3>
+    <h4 class="popup-price">$ {{this.listPrice}}</h4>
+    <p class="popup-bedrooms">Bedrooms: {{this.property.bedrooms}}</p>
+    <p class="popup-baths">Bathrooms: {{this.property.bathsFull}}{{#if this.property.bathsHalf}}.5{{/if}}</p>
+    <p class="popup-sqft">Square Footage: {{this.property.area}}</p>
+    <img src="{{this.photos.[0]}}" alt="" class="popup-image">
+    <a href="#listing:id"><button class="popup-more"><i class="fa fa-plus-circle"></i></button></a>
+</div>

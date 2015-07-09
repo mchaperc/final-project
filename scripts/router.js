@@ -6,6 +6,7 @@ var Router = Backbone.Router.extend({
 
 	routes: {
 		'': 'index',
+		'filtered': 'filtered',
 		'users/:id': 'users',
 		'listing/:id': 'listing'
 	},

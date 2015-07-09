@@ -1,3 +1,5 @@
+import PopUpView from './popup';
+import {HomeCollection} from '../models/homes';
 export default Backbone.View.extend({
 
 	template: JST['landing'],
@@ -11,11 +13,13 @@ export default Backbone.View.extend({
 
 	initialize: function(options) {
 		this.render(options);
+		this.collCopy = this.collection;
 	},
 
 	render: function(options) {
 		this.$el.html(this.template(this.collection.toJSON()));
-		//Once more MLS data is available, 
+		// Once more MLS data is available, this will be based on geolocation 
+		// and NOT hardcoded coordinates
 		var lat = '29.7604';
 		var lng = '-95.3698';
 		this.areaMap = new GMaps({
@@ -29,7 +33,7 @@ export default Backbone.View.extend({
 	},
 
 	renderChildren: function() {
-		
+		var self = this;
 		this.children = this.collection.map(function(child) {
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
@@ -37,9 +41,9 @@ export default Backbone.View.extend({
 				this.areaMap.addMarker({
 					lat: lat,
 					lng: lng,
-					info: child,
+					model: child,
 					click: function(e) {
-						console.log(this.info.attributes);
+						self.renderPopUp(this.model);
 					}
 				});
 			}
@@ -67,7 +71,13 @@ export default Backbone.View.extend({
 		var baths = $('.filter-bathrooms-input').val();
 		var minSq = $('.filter-sqft-min-input').val();
 		var maxSq = $('.filter-sqft-max-input').val();
-		console.log(minPrice, maxPrice, beds, baths, minSq, maxSq);
+		this.filteredCollection = new HomeCollection(this.collection.filteredCollection(minPrice, maxPrice, beds, baths, minSq, maxSq));
+		this.filteredRender();
+	},
+
+	renderPopUp: function(model) {
+		this.PopUp = new PopUpView({model: model});
+		this.$el.append(this.PopUp.el);
 	}
 
 })
