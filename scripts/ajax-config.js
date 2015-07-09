@@ -13,4 +13,3 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR){
   	options.headers['password'] = 'simplyrets';
   }
 });
-
