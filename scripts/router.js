@@ -18,6 +18,7 @@ var Router = Backbone.Router.extend({
 	},
 
 	index: function() {
+		$('#app').addClass('landing');
 		this.homes = new HomeCollection();
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -41,6 +42,7 @@ var Router = Backbone.Router.extend({
 	},
 
 	listing: function() {
+		$('#app').addClass('listing');
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {
 			var homesColl = new HomeCollection(data);
