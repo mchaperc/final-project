@@ -16,8 +16,10 @@ export default Backbone.View.extend({
 		this.$el.html(this.template(this.collection.toJSON()));
 	},
 
-	showData: function() {
-		$(this).children('div').show();
+	showData: function(event) {
+		$(event.target).parent().next().slideToggle();
+		$(event.target).children('.fa-chevron-down').toggle();
+    	$(event.target).children('.fa-chevron-up').toggle();
 	}
 
 })

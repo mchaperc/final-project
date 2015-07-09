@@ -42,6 +42,7 @@ var Router = Backbone.Router.extend({
 	},
 
 	listing: function() {
+		$('#app').removeClass('landing');
 		$('#app').addClass('listing');
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {

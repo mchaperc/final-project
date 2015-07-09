@@ -13,29 +13,39 @@
 	height: 100%;
 }
 
-.listing-data-containers li {
+.data-item {
 	border-bottom: 2px solid $blue;
 	font-size: 1.2em;
 	height: 80px;
 	line-height: 80px;
-	padding-left: 1em;
 	transition: all .2s ease;
 }
 
-.listing-data-containers li:hover {
+.data-item:hover {
 	background-color: $blue;
 	color: white;
 	cursor: pointer;
 }
 
-.listing-data-containers .fa-chevron-down {
+.listing-data-containers .fa-chevron-down,
+.listing-data-containers .fa-chevron-up {
 	float: right;
 	margin-right: 5%;
 	margin-top: 5%;
 }
 
-.listing-data-census-data {
+.listing-data-containers .fa-chevron-up {
 	display: none;
+}
+
+.listing-data-census-data,
+.listing-data-crime-data,
+.listing-data-schools-data,
+.listing-data-active-data {
+	background-color: $blue;
+	color: white;
+	display: none;
+	position:relative;
 }
 
 .listing-info {
