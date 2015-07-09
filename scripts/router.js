@@ -1,5 +1,7 @@
 import LandingView from './views/landing';
+import ListingView from './views/listing';
 import {HomeCollection} from './models/homes';
+import {SearchLocation} from './models/location';
 import config from './ajax-config';
 
 var Router = Backbone.Router.extend({
@@ -8,7 +10,7 @@ var Router = Backbone.Router.extend({
 		'': 'index',
 		'filtered': 'filtered',
 		'users/:id': 'users',
-		'listing/:id': 'listing'
+		'listing': 'listing'
 	},
 
 	initialize: function() {
@@ -24,10 +26,13 @@ var Router = Backbone.Router.extend({
 		});
 		Promise.resolve(this.myLocation).then(function(value) {
 			this.homes.fetch().then(function(data) {
+				var searchLocation = new SearchLocation();
 				this.homesColl = new HomeCollection(data);
-				this.LandingView = new LandingView({collection: this.homesColl, myLocation: value});
+				this.LandingView = new LandingView({collection: this.homesColl, 
+													myLocation: value, 
+													search: searchLocation});
 				$('#app').html(this.LandingView.el);
-			})
+			}.bind(this))
 		}.bind(this));
 	},
 
@@ -36,7 +41,12 @@ var Router = Backbone.Router.extend({
 	},
 
 	listing: function() {
-
+		var homes = new HomeCollection();
+		homes.fetch().then(function(data) {
+			var homesColl = new HomeCollection(data);
+			this.listingView = new ListingView({collection: homesColl});
+			$('#app').html(this.listingView.el);
+		}.bind(this));
 	}
 
 });

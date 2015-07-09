@@ -1,4 +1,5 @@
 import PopUpView from './popup';
+import {SearchLocation} from '../models/location';
 import {HomeCollection} from '../models/homes';
 export default Backbone.View.extend({
 
@@ -12,22 +13,33 @@ export default Backbone.View.extend({
 	},
 
 	initialize: function(options) {
+		this.searchLocation = this.searchLocation || options.search;
 		this.render(options);
-		this.collCopy = this.collection;
 	},
 
 	render: function(options) {
 		this.$el.html(this.template(this.collection.toJSON()));
 		// Once more MLS data is available, this will be based on geolocation 
 		// and NOT hardcoded coordinates
-		var lat = '29.7604';
-		var lng = '-95.3698';
-		this.areaMap = new GMaps({
-		  div: '#app',
-		  lat: lat,
-		  lng: lng,
-		  zoom: 10
-		});
+		if (this.searchLocation.get('lat') && this.searchLocation.get('lng')) {
+			var lat = this.searchLocation.lat;
+			var lng = this.searchLocation.lng;
+			this.areaMap = new GMaps({
+			  div: '#app',
+			  lat: lat,
+			  lng: lng,
+			  zoom: 10
+			});
+		} else {
+			var lat = '29.7604';
+			var lng = '-95.3698';
+			this.areaMap = new GMaps({
+			  div: '#app',
+			  lat: lat,
+			  lng: lng,
+			  zoom: 10
+			});
+		}
 
 		this.renderChildren();
 	},
@@ -48,7 +60,6 @@ export default Backbone.View.extend({
 				});
 			}
 		}.bind(this));
-
 	},
 
 	remove: function(){
@@ -60,7 +71,12 @@ export default Backbone.View.extend({
 		e.preventDefault();
 		var searchArea = $('.site-nav-item-search-area').val();
 		$('.site-nav-item-search-area').val('');
-		console.log(searchArea);	
+		this.searchLocation.set('address', searchArea);
+		this.searchLocation.fetch().then(function(data) {
+			this.searchLocation.set('lat', data.results[0].geometry.location.lat);
+			this.searchLocation.set('lng', data.results[0].geometry.location.lng);
+			console.log(this.searchLocation);
+		}.bind(this));
 	},
 
 	submitFilter: function(e) {
