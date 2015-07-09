@@ -465,3 +465,16 @@
 	background-color: rgba(12, 116, 202,.9);
 	cursor: pointer;
 }
+
+.overlay {
+	background-color: $blue;
+	border-radius: 3px;
+	color: white;
+	font-size: 1.2em;
+	padding: .4em;
+	pointer-events: visible;
+	position: relative;
+	text-align: center;
+	transition: all .1s linear;
+	z-index: 100;
+}

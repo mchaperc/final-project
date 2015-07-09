@@ -13,6 +13,7 @@ export default Backbone.View.extend({
 	},
 
 	initialize: function(options) {
+		this.originalCollection = new HomeCollection(this.collection);
 		this.searchLocation = this.searchLocation || options.search;
 		this.render(options);
 	},
@@ -21,18 +22,13 @@ export default Backbone.View.extend({
 		this.$el.html(this.template(this.collection.toJSON()));
 		// Once more MLS data is available, this will be based on geolocation 
 		// and NOT hardcoded coordinates
-		if (this.searchLocation.get('lat') && this.searchLocation.get('lng')) {
-			var lat = this.searchLocation.lat;
-			var lng = this.searchLocation.lng;
-			this.areaMap = new GMaps({
-			  div: '#app',
-			  lat: lat,
-			  lng: lng,
-			  zoom: 10
-			});
+
+		var lat = this.searchLocation.get('lat') || '29.7604';
+		var lng = this.searchLocation.get('lng') || '-95.3698';
+
+		if(this.areaMap) {
+			this.areaMap.setCenter(lat, lng);
 		} else {
-			var lat = '29.7604';
-			var lng = '-95.3698';
 			this.areaMap = new GMaps({
 			  div: '#app',
 			  lat: lat,
@@ -45,11 +41,21 @@ export default Backbone.View.extend({
 	},
 
 	renderChildren: function() {
+		this.areaMap.removeMarkers();
 		var self = this;
 		this.children = this.collection.map(function(child) {
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
 				var lng = child.attributes.geo.lng;
+				// this.areaMap.drawOverlay({
+				//   lat: lat,
+				//   lng: lng,
+				//   model: child,
+			 //  	  click: function(e) {
+				// 	self.renderPopUp(this.model);
+				//   }
+				//   content: '<div class="overlay">' + child.attributes.listPrice + '</div>'
+				// });
 				this.areaMap.addMarker({
 					lat: lat,
 					lng: lng,
@@ -76,6 +82,7 @@ export default Backbone.View.extend({
 			this.searchLocation.set('lat', data.results[0].geometry.location.lat);
 			this.searchLocation.set('lng', data.results[0].geometry.location.lng);
 			console.log(this.searchLocation);
+			this.render();
 		}.bind(this));
 	},
 
@@ -87,8 +94,9 @@ export default Backbone.View.extend({
 		var baths = $('.filter-bathrooms-input').val();
 		var minSq = $('.filter-sqft-min-input').val();
 		var maxSq = $('.filter-sqft-max-input').val();
-		this.filteredCollection = new HomeCollection(this.collection.filteredCollection(minPrice, maxPrice, beds, baths, minSq, maxSq));
-		this.filteredRender();
+		this.collection = new HomeCollection(this.collection.filteredCollection(minPrice, maxPrice, beds, baths, minSq, maxSq));
+		console.log(this.collection)
+		this.render();
 	},
 
 	renderPopUp: function(model) {

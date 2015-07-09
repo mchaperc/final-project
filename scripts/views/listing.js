@@ -5,7 +5,7 @@ export default Backbone.View.extend({
 	className: 'listing-container',
 
 	events: {
-		'click .data-item': 'showData',
+		'click .data-item': 'showData'
 	},
 
 	initialize: function() {
