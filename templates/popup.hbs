@@ -6,5 +6,5 @@
     <p class="popup-baths">Bathrooms: {{this.property.bathsFull}}{{#if this.property.bathsHalf}}.5{{/if}}</p>
     <p class="popup-sqft">Square Footage: {{this.property.area}}</p>
     <img src="{{this.photos.[0]}}" alt="" class="popup-image">
-    <a href="#listing:id"><button class="popup-more"><i class="fa fa-plus-circle"></i></button></a>
+    <a href="#listing/{{this.mlsId}}"><button class="popup-more"><i class="fa fa-plus-circle"></i></button></a>
 </div>
