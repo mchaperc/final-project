@@ -10,16 +10,16 @@ var Router = Backbone.Router.extend({
 		'': 'index',
 		'filtered': 'filtered',
 		'users/:id': 'users',
-		'listing': 'listing'
+		'listing/:id': 'listing'
 	},
 
 	initialize: function() {
-		
+		this.homes = new HomeCollection();
+		this.homes.fetch();
 	},
 
 	index: function() {
 		$('#app').addClass('landing');
-		this.homes = new HomeCollection();
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
 		}).then(function(position) {
@@ -41,13 +41,16 @@ var Router = Backbone.Router.extend({
 
 	},
 
-	listing: function() {
+	listing: function(id) {
 		$('#app').removeClass('landing');
 		$('#app').addClass('listing');
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {
 			var homesColl = new HomeCollection(data);
-			this.listingView = new ListingView({collection: homesColl});
+			var home = homesColl.filter(function(listing) {
+				return listing.get('mlsId') == id;
+			})[0];
+			this.listingView = new ListingView({model: home, collection: homesColl});
 			$('#app').html(this.listingView.el);
 		}.bind(this));
 	}

@@ -1,3 +1,5 @@
+{{log this}}
+
 <section class="listing-data">
 	<div class="listing-data-containers">
 		<div class="listing-data-census data-item">
@@ -30,29 +32,35 @@
 	<div class="listing-info-images">
 		<i class="fa fa-chevron-right"></i>
 		<i class="fa fa-chevron-left"></i>
-		<img class="listing-info-images-image" src="http://s.hswstatic.com/gif/buying-house1.jpg" alt="">
+		<img class="listing-info-images-image" src="{{this.photos.[0]}}" alt="">
 		<ul class="listing-info-images-thumbnails">
-			<li class="listing-info-images-thumbnails-item"><img src="http://s.hswstatic.com/gif/buying-house1.jpg" alt=""></li>{{!-- 
-			 --}}<li class="listing-info-images-thumbnails-item"><img src="http://s.hswstatic.com/gif/buying-house1.jpg" alt=""></li>{{!-- 
-			 --}}<li class="listing-info-images-thumbnails-item"><img src="http://s.hswstatic.com/gif/buying-house1.jpg" alt=""></li>{{!-- 
-			 --}}<li class="listing-info-images-thumbnails-item"><img src="http://s.hswstatic.com/gif/buying-house1.jpg" alt=""></li>{{!-- 
-			 --}}<li class="listing-info-images-thumbnails-item"><img src="http://s.hswstatic.com/gif/buying-house1.jpg" alt=""></li>
+			{{#each this.photos}}
+				<li class="listing-info-images-thumbnails-item"><img src="{{this}}" alt=""></li>
+			 {{/each}}
 		</ul>
 	</div>
 	<div class="listing-info-content">
-		<h3 class="listing-info-content-address">Address: <span class="content-data">A place you've never been and never want to go!</span></h3>
-		<h3 class="listing-info-content-price">Price: <span class="content-data">A cool 1.5mil...</span></h3>
+		<h3 class="listing-info-content-address">Address: <span class="content-data">{{this.address.full}}<br>{{this.address.city}}, TX - {{this.address.postalCode}}</span></h3>
+		<h3 class="listing-info-content-price">Price: <span class="content-data">${{this.listPrice}}</span></h3>
 		<ul class="listing-info-content-features">
-			<h4 class="listing-info-content-features-heading">Property Features:</h4>
-			<li class="content-data">A roof</li>
-			<li class="content-data">Indoor plumbing</li>
-			<li class="content-data">Most doors open and close</li>
+			<h4 class="listing-info-content-features-heading">Exterior Features:</h4>
+			{{#if this.exteriorFeatures}}
+				{{#each this.exteriorFeatures}}
+					<li class="content-data">{{this}}</li>
+				{{/each}}
+			{{else}}
+				<li class="content-data">No exterior features available for this listing.</li>
+			{{/if}}
 		</ul>
-		<ul class="listing-info-content-facts">
-			<h4 class="listing-info-content-facts-heading">Property Facts:</h4>
-			<li class="content-data">Old as dirt</li>
-			<li class="content-data">neighbors smell</li>
-			<li class="content-data">sits atop an ancient Indian burial ground</li>
+		<ul class="listing-info-content-features">
+			<h4 class="listing-info-content-facts-heading">Interior:</h4>
+			{{#if this.interiorFeatures}}
+				{{#each this.interiorFeatures}}
+					<li class="content-data">{{this}}</li>
+				{{/each}}
+			{{else}}
+				<li class="content-data">No interior features available for this listing.</li>
+			{{/if}}
 		</ul>
 	</div>
 </section>
