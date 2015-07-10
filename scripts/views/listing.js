@@ -1,3 +1,6 @@
+import DataView from './data';
+import {DemographicsCollection} from '../models/demographicsCollection';
+// import {CensusCollection} from '../models/censusCollection';
 export default Backbone.View.extend({
 
 	template: JST['listing'],
@@ -22,6 +25,17 @@ export default Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
+		this.renderData();
+	},
+
+	renderData: function() {
+		var demographics = new DemographicsCollection();
+		demographics.fetch().then(function(data) {
+			// var demographicsColl = new DemographicsCollection(data);
+			// var dataView = new DataView({demographics: demographicsColl});
+			// this.$el.prepend(dataView.el);
+			console.log(data.response);
+		}.bind(this));
 	},
 
 	showData: function(event) {

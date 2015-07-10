@@ -58,6 +58,8 @@
 .listing-info {
 	@include span-columns(7);
 	border-left: 2px solid $blue;
+	padding-bottom: 1em;
+	min-height: 705px;
 }
 
 .listing-info-images {
