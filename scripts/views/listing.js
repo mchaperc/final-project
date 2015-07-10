@@ -17,6 +17,9 @@ export default Backbone.View.extend({
 	},
 
 	showData: function(event) {
+		$('.data-view').slideUp();
+		$('.fa-chevron-down').show();
+    	$('.fa-chevron-up').hide();
 		$(event.target).parent().next().slideToggle();
 		$(event.target).children('.fa-chevron-down').toggle();
     	$(event.target).children('.fa-chevron-up').toggle();
