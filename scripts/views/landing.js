@@ -51,7 +51,7 @@ export default Backbone.View.extend({
 				//   lat: lat,
 				//   lng: lng,
 				//   model: child,
-			 //  	  click: function(e) {
+			 //  	 click: function(e) {
 				// 	self.renderPopUp(this.model);
 				//   }
 				//   content: '<div class="overlay">' + child.attributes.listPrice + '</div>'
