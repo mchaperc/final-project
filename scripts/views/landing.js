@@ -1,6 +1,7 @@
 import PopUpView from './popup';
 import {SearchLocation} from '../models/location';
 import {HomeCollection} from '../models/homes';
+import router from '../router';
 
 export default Backbone.View.extend({
 
@@ -14,6 +15,7 @@ export default Backbone.View.extend({
 		'click .login-submit': 'logIn',
 		'click .register-submit': 'createUser'
 	},
+
 
 	initialize: function(options) {
 		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
@@ -111,7 +113,17 @@ export default Backbone.View.extend({
 	},
 
 	logIn: function() {
-
+		var username = this.$('.login-email').val();
+		var password = this.$('.login-password').val();
+		Parse.User.logIn(username, password, {
+		  success: function(user) {
+		    console.log(user);
+		    router.navigate('#users', true);
+		  },
+		  error: function(user, error) {
+		    console.log(error);
+		  }
+		});
 	},
 
 	createUser: function() {

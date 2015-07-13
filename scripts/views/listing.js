@@ -19,6 +19,7 @@ export default Backbone.View.extend({
 		if(this.model.attributes.property.interiorFeatures) {
 			this.model.set('interiorFeatures', this.model.attributes.property.interiorFeatures.split(','));
 		}
+		this.listPrice();
 		this.render();
 	},
 
@@ -35,6 +36,24 @@ export default Backbone.View.extend({
 			// this.$el.prepend(dataView.el);
 			console.log(data.response);
 		}.bind(this));
+	},
+
+	listPrice: function() {
+		var price = this.model.get('listPrice');
+		if (price < 100000) {
+			price = price.toString().split('');
+			price.splice(2, 0, ',');
+			return this.model.set('listPrice', price.join(''));
+		} else if (price < 1000000) {	
+			price = price.toString().split('');
+			price.splice(3, 0, ',');
+			return this.model.set('listPrice', price.join(''));
+		} else if (price >= 1000000) {	
+			price = price.toString().split('');
+			price.splice(4, 0, ',');
+			price.splice(1, 0, ',');
+			return this.model.set('listPrice', price.join(''));
+		}
 	},
 
 	showData: function(event) {

@@ -5,7 +5,7 @@ export default Backbone.View.extend({
 	className: 'user-container',
 
 	events: {
-
+		'click .user-header-logout': 'logOut',
 	},
 
 	initialize: function() {
@@ -15,6 +15,10 @@ export default Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template(this.collection.toJSON()));
+	},
+
+	logOut: function() {
+		Parse.User.logOut();
 	}
 
 });
