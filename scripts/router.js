@@ -22,7 +22,9 @@ var Router = Backbone.Router.extend({
 	},
 
 	index: function() {
+		$('#app').html('');
 		$('#app').removeClass('listing');
+		$('#app').removeClass('users');
 		$('#app').addClass('landing');
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -52,6 +54,7 @@ var Router = Backbone.Router.extend({
 	},
 
 	users: function() {
+		$('#app').html('');
 		$('#app').removeClass('listing');
 		$('#app').addClass('users');
 		// if (Parse.User.current()) {
@@ -67,7 +70,9 @@ var Router = Backbone.Router.extend({
 	},
 
 	listing: function(id) {
+		$('#app').html('');
 		$('#app').removeClass('landing');
+		$('#app').removeClass('users');
 		$('#app').addClass('listing');
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {

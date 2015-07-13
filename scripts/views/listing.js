@@ -19,7 +19,6 @@ export default Backbone.View.extend({
 		if(this.model.attributes.property.interiorFeatures) {
 			this.model.set('interiorFeatures', this.model.attributes.property.interiorFeatures.split(','));
 		}
-		$('.bxslider').bxSlider();
 		this.render();
 	},
 
@@ -39,6 +38,9 @@ export default Backbone.View.extend({
 	},
 
 	showData: function(event) {
+		if ((event.target).css('display') == 'none') {
+
+		}
 		$('.data-view').slideUp();
 		$('.fa-chevron-down').show();
     	$('.fa-chevron-up').hide();
