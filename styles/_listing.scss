@@ -1,26 +1,33 @@
 .listing {
-	background-image: none;
+	background-image: url('../../img/city.jpeg');
+	background-position: 50% 80%;
+	background-size: cover;
+	background-repeat: no-repeat;
 	background-color: rgb(250,250,250);
 }
 
 .listing-container {
-	height: 100%;
+	box-shadow: 0 0 10px rgba(0,0,0,.4);
+	// height: 100%;
+	height: 705px;
+	overflow: hidden;
 	width: 100%;
 }
 
 .listing-header {
 	background-color: $listing-blue;
 	border-bottom: 2px solid $listing-blue;
-	height: 60px;
-	width: 100%;
+	height: 70px;
+	margin: auto;
+	width: 75%;
 }
 
 .listing-header-branding {
-	@include span-columns(3);
+	@include span-columns(4);
 	@include shift(1);
 	background-color: rgb(250,250,250);
 	font-size: 1.8vw;
-	line-height: 60px;
+	line-height: 70px;
 	text-align: center;
 }
 
@@ -35,7 +42,7 @@
 
 .listing-header-nav {
 	@include span-columns(5);
-	@include shift(3);
+	@include shift(2);
 }
 
 .listing-header-nav li {
@@ -43,67 +50,24 @@
 	@include omega();
 	color: rgb(250,250,250);
 	display: inline-block;
-	line-height: 60px;
+	line-height: 70px;
 	text-align: center;
 	transition: all .2s ease;
 }
 
 .listing-header-nav li:hover {
-	background-color: $light-blue;
+	background-color: rgb(250,250,250);
+	color: $blue;
 	font-size: 1.1em;
 	cursor: pointer;
 }
 
-.listing-data {
-	@include span-columns(5);
-	height: 100%;
-}
-
-.data-item {
-	border-bottom: 2px solid $listing-blue;
-	font-size: 1.2em;
-	height: 80px;
-	line-height: 80px;
-	transition: all .2s ease;
-}
-
-.data-item:hover {
-	background-color: $listing-blue;
-	color: rgb(250,250,250);
-	cursor: pointer;
-}
-
-.listing-data-containers .fa-chevron-down,
-.listing-data-containers .fa-chevron-up {
-	float: right;
-	margin-right: 5%;
-	margin-top: 5%;
-}
-
-.listing-data-containers .fa-chevron-up {
-	display: none;
-}
-
-.listing-data-census-data,
-.listing-data-crime-data,
-.listing-data-schools-data,
-.listing-data-active-data {
-	background-color: $listing-blue;
-	color: rgb(250,250,250);
-	display: none;
-	position:relative;
-}
-
-.listing-data-census-heading,
-.listing-data-crime-heading,
-.listing-data-schools-heading,
-.listing-data-active-heading {
-	margin-left: 1em;
-}
-
 .listing-info {
-	@include span-columns(7);
-	border-left: 2px solid $listing-blue;
+	@include span-columns(9);
+	@include shift(1.5);
+	background-color: rgba(250,250,250,1);
+	border-bottom: 2px solid $listing-blue;
+	overflow: scroll;
 	padding-bottom: 1em;
 	min-height: 705px;
 }
@@ -141,8 +105,7 @@
 }
 
 .listing-info-images-thumbnails {
-	border-bottom: 2px solid $listing-blue;
-	border-top: 2px solid $listing-blue;
+	background-color: $listing-blue;
 	text-align: center;
 	width: 100%;
 }
@@ -182,5 +145,55 @@
 
 .listing-info-content li {
 	list-style-type: disc;
+	margin-left: 1em;
+}
+
+.listing-data {
+	@include span-columns(9);
+	@include shift(1.5);
+	height: 100%;
+}
+
+.data-item {
+	border-bottom: 2px solid $listing-blue;
+	border-left: 2px solid $listing-blue;
+	border-right: 2px solid $listing-blue;
+	font-size: 1.2em;
+	height: 80px;
+	line-height: 80px;
+	transition: all .2s ease;
+}
+
+.data-item:hover {
+	background-color: $listing-blue;
+	color: rgb(250,250,250);
+	cursor: pointer;
+}
+
+.listing-data-containers .fa-chevron-down,
+.listing-data-containers .fa-chevron-up {
+	float: right;
+	margin-right: 5%;
+	margin-top: 5%;
+}
+
+.listing-data-containers .fa-chevron-up {
+	display: none;
+}
+
+.listing-data-census-data,
+.listing-data-crime-data,
+.listing-data-schools-data,
+.listing-data-active-data {
+	background-color: $listing-blue;
+	color: rgb(250,250,250);
+	display: none;
+	position:relative;
+}
+
+.listing-data-census-heading,
+.listing-data-crime-heading,
+.listing-data-schools-heading,
+.listing-data-active-heading {
 	margin-left: 1em;
 }
