@@ -1,6 +1,7 @@
 import PopUpView from './popup';
 import {SearchLocation} from '../models/location';
 import {HomeCollection} from '../models/homes';
+
 export default Backbone.View.extend({
 
 	template: JST['landing'],
@@ -9,10 +10,13 @@ export default Backbone.View.extend({
 
 	events: {
 		'submit .site-nav-item-search-form': 'submitSearch',
-		'submit .site-nav-item-filter': 'submitFilter'
+		'submit .site-nav-item-filter': 'submitFilter',
+		'click .login-submit': 'logIn',
+		'click .register-submit': 'createUser'
 	},
 
 	initialize: function(options) {
+		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
 		this.originalCollection = this.collection.clone();
 		this.searchLocation = this.searchLocation || options.search;
 		this.render(options);
@@ -20,6 +24,7 @@ export default Backbone.View.extend({
 
 	render: function(options) {
 		this.$el.html(this.template(this.collection.toJSON()));
+
 		// Once more MLS data is available, this will be based on geolocation 
 		// and NOT hardcoded coordinates
 
@@ -103,6 +108,29 @@ export default Backbone.View.extend({
 	renderPopUp: function(model) {
 		this.PopUp = new PopUpView({model: model});
 		this.$el.append(this.PopUp.el);
+	},
+
+	logIn: function() {
+
+	},
+
+	createUser: function() {
+		var name = this.$('.register-name').val();
+		var username = this.$('.register-email').val();
+		var password = this.$('.register-password').val();
+		var user = new Parse.User();
+		user.set('username', username);
+		user.set('password', password);
+		user.signUp(null, {
+			success: function(user) {
+				console.log(user);
+				router.navigate('');
+			},
+			error: function(user, error) {
+				alert('Error: registration unsuccessful due to ' + error);
+				console.log(error);
+			}
+		});
 	}
 
 })
