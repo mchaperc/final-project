@@ -131,12 +131,13 @@ export default Backbone.View.extend({
 		var username = this.$('.register-email').val();
 		var password = this.$('.register-password').val();
 		var user = new Parse.User();
+		user.set('name', name);
 		user.set('username', username);
 		user.set('password', password);
 		user.signUp(null, {
 			success: function(user) {
 				console.log(user);
-				router.navigate('');
+				router.navigate('', true);
 			},
 			error: function(user, error) {
 				alert('Error: registration unsuccessful due to ' + error);

@@ -8,13 +8,13 @@ export default Backbone.View.extend({
 		'click .user-header-logout': 'logOut',
 	},
 
-	initialize: function() {
+	initialize: function() { 
 		this.render();
-		console.log(this.collection);
+		// console.log(this.model);
 	},
 
 	render: function() {
-		this.$el.html(this.template(this.collection.toJSON()));
+		this.$el.html(this.template(this.model.toJSON()));
 	},
 
 	logOut: function() {

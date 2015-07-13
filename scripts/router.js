@@ -57,16 +57,16 @@ var Router = Backbone.Router.extend({
 		$('#app').html('');
 		$('#app').removeClass('listing');
 		$('#app').addClass('users');
-		// if (Parse.User.current()) {
-		this.homes.fetch().then(function(data) {
-			var homesColl = new HomeCollection(data);
-			var user = new User();
-			var userView = new UserView({model: user, collection: homesColl});
-			$('#app').html(userView.el);
-		})
-		// } else {
-		// 	router.navigate('');
-		// }
+		if (Parse.User.current()) {
+			this.homes.fetch().then(function(data) {
+				var homesColl = new HomeCollection(data);
+				var user = Parse.User.current();
+				var userView = new UserView({model: user, collection: homesColl});
+				$('#app').html(userView.el);
+			})
+		} else {
+			router.navigate('');
+		}
 	},
 
 	listing: function(id) {
