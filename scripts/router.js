@@ -61,9 +61,6 @@ var Router = Backbone.Router.extend({
 			this.homes.fetch().then(function(data) {
 				var homesColl = new HomeCollection(data);
 				var user = Parse.User.current();
-				user.fetch().then(function(data) {
-					console.log(data);
-				})
 				var userView = new UserView({model: user, collection: homesColl});
 				$('#app').html(userView.el);
 			})
@@ -83,7 +80,10 @@ var Router = Backbone.Router.extend({
 			var home = homesColl.filter(function(listing) {
 				return listing.get('mlsId') == id;
 			})[0];
-			this.listingView = new ListingView({model: home, collection: homesColl});
+			if(Parse.User.current()) {
+				var user = Parse.User.current();
+			}
+			this.listingView = new ListingView({model: home, collection: homesColl, user: user});
 			$('#app').html(this.listingView.el);
 		}.bind(this));
 	}
