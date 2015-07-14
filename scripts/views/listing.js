@@ -1,6 +1,7 @@
 import DataView from './data';
 import {DemographicsCollection} from '../models/demographicsCollection';
-// import {CensusCollection} from '../models/censusCollection';
+import {SchoolCollection} from '../models/schools';
+
 export default Backbone.View.extend({
 
 	template: JST['listing'],
@@ -9,7 +10,8 @@ export default Backbone.View.extend({
 
 	events: {
 		'click .data-item': 'showData',
-		'click .listing-info-images-thumbnails-item': 'changeImage'
+		'click .listing-info-images-thumbnails-item': 'changeImage',
+		'click .home': 'home'
 	},
 
 	initialize: function() {
@@ -34,7 +36,11 @@ export default Backbone.View.extend({
 			// var demographicsColl = new DemographicsCollection(data);
 			// var dataView = new DataView({demographics: demographicsColl});
 			// this.$el.prepend(dataView.el);
-			console.log(data.response);
+			console.log(data);
+		}.bind(this));
+		var schools = new SchoolCollection();
+		schools.fetch().then(function(data) {
+			console.log(data);
 		}.bind(this));
 	},
 
