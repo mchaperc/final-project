@@ -1,18 +1,25 @@
 .listing {
+	background-position: 60% 80%;
 	background-image: url('../../img/city.jpeg');
-	background-position: 50% 80%;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-color: rgb(250,250,250);
+	background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height:100%;
+    width:100%;
+    overflow: auto;
 }
 
 .listing-container {
 	box-shadow: 0 0 10px rgba(0,0,0,.4);
+	display: inline-block;
 	// height: 100%;
 	height: 705px;
 	overflow: hidden;
 	width: 100%;
 }
+
 
 .listing-header {
 	background-color: $listing-blue;
@@ -67,6 +74,7 @@
 	@include shift(1.5);
 	background-color: rgba(250,250,250,1);
 	border-bottom: 2px solid $listing-blue;
+	display: inline-block;
 	overflow: scroll;
 	padding-bottom: 1em;
 	min-height: 705px;
@@ -74,20 +82,19 @@
 
 .listing-info-images {
 	font-size: 2em;
-	padding-top: .5em;
 	position: relative;
 }
 
 .listing-info .fa-chevron-right {
 	position: absolute;
-	right: 15%;
+	right: 5%;
 	top: 35%;
 	transition: all .2s linear;
 }
 
 .listing-info .fa-chevron-left {
 	position: absolute;
-	left: 15%;
+	left: 5%;
 	top: 35%;
 	transition: all .1s linear;
 }
@@ -99,13 +106,14 @@
 }
 
 .listing-info-images-image {
-	width: 50%;
-	margin-bottom: .5em;
-	margin-left: 25%;
+	width: 70%;
+	margin-left: 15%;
 }
 
 .listing-info-images-thumbnails {
 	background-color: $listing-blue;
+	margin-top: -5px;
+	position: relative;
 	text-align: center;
 	width: 100%;
 }
@@ -151,6 +159,7 @@
 .listing-data {
 	@include span-columns(9);
 	@include shift(1.5);
+	display: inline-block;
 	height: 100%;
 }
 

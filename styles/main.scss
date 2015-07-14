@@ -32,15 +32,17 @@ $base-background-color: $very-light-gray;
 @import 'listing';
 @import 'users';
 
-body {
+html, body {
   font-family: $base-font-family;
   background-color: $base-background-color;
   color: $base-font-color;
   height: 100%;
   width: 100%;
+  clear: both;
 }
 
 #app {
-	min-height: 705px;
+	clear: both;
+	height: 100%;
 	width: 100%;
 }
