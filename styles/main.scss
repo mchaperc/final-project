@@ -22,22 +22,26 @@ $purple: rgba(81, 34, 131,.9);
 $yellow: rgba(240, 206, 47,.9);
 $blue: rgba(22, 136, 222,.9);
 $red: rgba(194, 29, 35,.9);
+$listing-blue: rgb(0, 153, 204);
+$light-blue: rgb(102, 204, 255);
 
 $base-font-color: $dark-gray;
 $base-background-color: $very-light-gray;
 
 @import 'landing';
 @import 'listing';
+@import 'users';
 
-body {
+html, body {
   font-family: $base-font-family;
   background-color: $base-background-color;
   color: $base-font-color;
   height: 100%;
+  overflow: scroll;
   width: 100%;
 }
 
 #app {
-	min-height: 705px;
+	height: 100%;
 	width: 100%;
 }

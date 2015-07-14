@@ -1,0 +1,45 @@
+<div class="screen">
+<header class="user-header">
+	<div class="user-header-branding">
+		<i class="fa fa-graduation-cap fa-2x"></i>
+		<h3 class="user-header-branding-text">The Educated Homebuyer</h3>
+	</div>
+	<h3 class="user-header-greeting">Welcome, {{this.name}}!</h3>
+	<ul class="user-header-nav">
+		<li class="user-header-nav-link"><a href="#">Home</a></li> |{{!-- 
+		 --}}<li class="user-header-nav-link"><button class="user-header-logout">Logout</button></li>
+	</ul>
+</header>
+
+<section class="user-saved-homes">
+	<h3 class="user-saved-homes-heading">Saved Homes:</h3>
+	<ul class="user-saved-homes-list">
+		<a href="">
+		{{#each this.homes}}
+		<a href="#listing/{{this.mlsId}}"><li class="user-saved-homes-item">
+			<img src="{{this.image}}" alt="">
+			<div class="user-saved-homes-item-text">
+				<p><span>Address:</span> {{this.address}}</p>
+				<p><span>Price:</span> ${{this.price}}</p>
+			</div>
+		</li></a>
+		{{/each}}
+	</ul>
+	<div class="user-saved-homes-footer"></div>
+</section>
+
+<section class="user-saved-filters">
+	<h3 class="user-saved-filters-heading">Filters:</h3>
+	<div class="user-saved-filters-filters">
+		<label class="user-saved-filters-price">Min and Max Price:</label>
+		<input class="user-saved-filters-price-min" type="number"> to <input class="user-saved-filters-price-max" type="number">
+		<label class="user-saved-filters-bedrooms">Bedrooms:</label>
+		<input type="number" class="user-saved-filters-bedrooms">
+		<label class="user-saved-filters-bathrooms">Bathrooms:</label>
+		<input type="number" class="user-saved-filters-bathrooms">
+		<label class="user-saved-filters-sqft">Square Feet:</label>
+		<input class="user-saved-filters-sqft-min" type="number"> to <input class="user-saved-filters-sqft-max" type="number">
+	</div>
+	<div class="user-saved-filters-footer"></div>
+</section>
+</div>
