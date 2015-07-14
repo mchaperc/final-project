@@ -15,13 +15,15 @@
 	<h3 class="user-saved-homes-heading">Saved Homes:</h3>
 	<ul class="user-saved-homes-list">
 		<a href="">
-		<a href="#listing/{{this.[0].mlsId}}"><li class="user-saved-homes-item">
-			<img src="{{this.[0].photos.[0]}}" alt="">
+		{{#each this.homes}}
+		<a href="#listing/{{this.mlsId}}"><li class="user-saved-homes-item">
+			<img src="{{this.image}}" alt="">
 			<div class="user-saved-homes-item-text">
-				<p><span>Address:</span> {{this.[0].address.full}}</p>
-				<p><span>Price:</span> ${{this.[0].listPrice}}</p>
+				<p><span>Address:</span> {{this.address}}</p>
+				<p><span>Price:</span> ${{this.price}}</p>
 			</div>
 		</li></a>
+		{{/each}}
 		<a href="#listing/{{this.[1].mlsId}}"><li class="user-saved-homes-item">
 			<img src="{{this.[1].photos.[0]}}" alt="">
 			<div class="user-saved-homes-item-text">

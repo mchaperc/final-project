@@ -1,11 +1,13 @@
 var User = Backbone.Model.extend({
 
 	idAttribute: 'objectId',
-	urlRoot: 'https://api.parse.com/1/users',
+	urlRoot: 'https://api.parse.com/1/user',
 	defaults: {
 		name: '',
 		username: '',
-		password: ''
+		password: '',
+		homes: [],
+		filters: {}
 	}
 
 });
@@ -13,7 +15,7 @@ var User = Backbone.Model.extend({
 var UserCollection = Backbone.Collection.extend({
 
 	model: User,
-	url: 'https://api.parse.com/1/users'
+	url: 'https://api.parse.com/1/user'
 
 });
 

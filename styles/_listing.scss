@@ -6,25 +6,22 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height:100%;
-    width:100%;
     overflow: auto;
+    width:100%;
 }
 
 .listing-container {
 	box-shadow: 0 0 10px rgba(0,0,0,.4);
 	display: inline-block;
-	// height: 100%;
-	height: 705px;
-	overflow: hidden;
+	height: 100%;
 	width: 100%;
+	overflow-y: scroll;
 }
 
 
 .listing-header {
-	background-color: $listing-blue;
-	border-bottom: 2px solid $listing-blue;
-	height: 70px;
+	background-color: $blue;
+	height: 10%;
 	margin: auto;
 	width: 75%;
 }
@@ -53,7 +50,7 @@
 }
 
 .listing-header-nav li {
-	@include span-columns(1.5 of 5);
+	@include span-columns(1.666 of 5);
 	@include omega();
 	color: rgb(250,250,250);
 	display: inline-block;
@@ -69,15 +66,20 @@
 	cursor: pointer;
 }
 
+.listing-content {
+	height: 90%;
+	overflow: scroll;
+}
+
 .listing-info {
 	@include span-columns(9);
 	@include shift(1.5);
 	background-color: rgba(250,250,250,1);
-	border-bottom: 2px solid $listing-blue;
+	border-bottom: 2px solid $blue;
 	display: inline-block;
+	height: 100%;
 	overflow: scroll;
-	padding-bottom: 1em;
-	min-height: 705px;
+	padding-bottom: 2em;
 }
 
 .listing-info-images {
@@ -101,17 +103,17 @@
 
 .listing-info .fa-chevron-left:hover,
 .listing-info .fa-chevron-right:hover {
-	color: $listing-blue;
+	color: $blue;
 	cursor: pointer;
 }
 
 .listing-info-images-image {
-	width: 70%;
-	margin-left: 15%;
+	width: 72%;
+	margin-left: 14%;
 }
 
 .listing-info-images-thumbnails {
-	background-color: $listing-blue;
+	background-color: $blue;
 	margin-top: -5px;
 	position: relative;
 	text-align: center;
@@ -159,14 +161,15 @@
 .listing-data {
 	@include span-columns(9);
 	@include shift(1.5);
+	background-color: rgb(250,250,250);
 	display: inline-block;
-	height: 100%;
+	height: 60%;
+	overflow: scroll;
+	position: relative;
 }
 
 .data-item {
-	border-bottom: 2px solid $listing-blue;
-	border-left: 2px solid $listing-blue;
-	border-right: 2px solid $listing-blue;
+	border-bottom: 2px solid $blue;
 	font-size: 1.2em;
 	height: 80px;
 	line-height: 80px;
@@ -174,7 +177,7 @@
 }
 
 .data-item:hover {
-	background-color: $listing-blue;
+	background-color: $blue;
 	color: rgb(250,250,250);
 	cursor: pointer;
 }
@@ -183,7 +186,7 @@
 .listing-data-containers .fa-chevron-up {
 	float: right;
 	margin-right: 5%;
-	margin-top: 5%;
+	margin-top: 3.1%;
 }
 
 .listing-data-containers .fa-chevron-up {
@@ -194,7 +197,7 @@
 .listing-data-crime-data,
 .listing-data-schools-data,
 .listing-data-active-data {
-	background-color: $listing-blue;
+	background-color: $blue;
 	color: rgb(250,250,250);
 	display: none;
 	position:relative;

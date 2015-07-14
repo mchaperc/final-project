@@ -61,6 +61,9 @@ var Router = Backbone.Router.extend({
 			this.homes.fetch().then(function(data) {
 				var homesColl = new HomeCollection(data);
 				var user = Parse.User.current();
+				user.fetch().then(function(data) {
+					console.log(data);
+				})
 				var userView = new UserView({model: user, collection: homesColl});
 				$('#app').html(userView.el);
 			})

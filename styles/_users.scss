@@ -1,15 +1,19 @@
 .users {
+	background-position: 60% 80%;
 	background-image: url('../../img/city.jpeg');
-	background-position: 50% 80%;
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: auto;
 	background-color: rgb(250,250,250);
 	height: 100%;
 }
 
 .screen {
 	background-color: rgba(50,50,50,.6);
-	min-height: 705px;
+	height: 100%;
 }
 
 .user-header {
@@ -90,6 +94,9 @@
 	@include span-columns(5);
 	@include shift(1);
 	margin-top: 2em;
+	max-height: 70%;
+	overflow-x: auto;
+	overflow-y: scroll;
 }
 
 .user-saved-homes-heading {
@@ -118,7 +125,7 @@ a .user-saved-homes-item {
 a .user-saved-homes-item:hover {
 	background-color: rgba(73, 174, 69,1);
 	color: white;
-	transform: scale(1.1);
+	// transform: scale(1.1);
 	z-index: 2;
 }
 

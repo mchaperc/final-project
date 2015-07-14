@@ -1,3 +1,4 @@
+import router from '../router';
 export default Backbone.View.extend({
 
 	template: JST['user'],
@@ -10,7 +11,7 @@ export default Backbone.View.extend({
 
 	initialize: function() { 
 		this.render();
-		console.log(this.model);
+		console.log(this.model.get('homes'));
 	},
 
 	render: function() {
@@ -19,6 +20,7 @@ export default Backbone.View.extend({
 
 	logOut: function() {
 		Parse.User.logOut();
+		router.navigate('', true);
 	}
 
 });

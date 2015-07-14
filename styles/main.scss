@@ -37,12 +37,11 @@ html, body {
   background-color: $base-background-color;
   color: $base-font-color;
   height: 100%;
+  overflow: scroll;
   width: 100%;
-  clear: both;
 }
 
 #app {
-	clear: both;
 	height: 100%;
 	width: 100%;
 }

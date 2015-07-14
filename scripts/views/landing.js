@@ -134,6 +134,8 @@ export default Backbone.View.extend({
 		user.set('name', name);
 		user.set('username', username);
 		user.set('password', password);
+		user.set('homes', []);
+		user.set('filters', {});
 		user.signUp(null, {
 			success: function(user) {
 				console.log(user);

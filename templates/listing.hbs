@@ -5,74 +5,77 @@
 	</div>
 	<ul class="listing-header-nav">
 		<a href="#"><li class="listing-header-nav-links"><i class="fa fa-home"></i> Home</li></a>
-		<li class="listing-header-nav-links save"><i class="fa fa-heart-o"></i> Save</li>
-		<a href="#users"><li class="listing-header-nav-links user"><i class="fa fa-user"></i> My Profile</li></a>
+		{{#if this.isUser}}
+			<li class="listing-header-nav-links save"><i class="fa fa-heart-o"></i> Save</li>
+			<a href="#users"><li class="listing-header-nav-links user"><i class="fa fa-user"></i> My Profile</li></a>
+		{{/if}}
 	</ul>
 </header>
+<section class="listing-content">
+	<section class="listing-info">
+		<div class="listing-info-images">
+			<i class="fa fa-chevron-right"></i>
+			<i class="fa fa-chevron-left"></i>
+			<img class="listing-info-images-image" src="{{this.photos.[0]}}" alt="">
+			<ul class="listing-info-images-thumbnails">
+				{{#each this.photos}}
+					<li class="listing-info-images-thumbnails-item"><img src="{{this}}" alt=""></li>
+				 {{/each}}
+			</ul>
+		</div>
+		<div class="listing-info-content">
+			<h3 class="listing-info-content-address">Address: <span class="content-data">{{this.address.full}}<br>{{this.address.city}}, TX - {{this.address.postalCode}}</span></h3>
+			<h3 class="listing-info-content-price">Price: <span class="content-data">${{this.listPrice}}</span></h3>
+			<ul class="listing-info-content-features">
+				<h4 class="listing-info-content-features-heading">Exterior Features:</h4>
+				{{#if this.exteriorFeatures}}
+					{{#each this.exteriorFeatures}}
+						<li class="content-data">{{this}}</li>
+					{{/each}}
+				{{else}}
+					<li class="content-data">No exterior features available for this listing.</li>
+				{{/if}}
+			</ul>
+			<ul class="listing-info-content-features">
+				<h4 class="listing-info-content-facts-heading">Interior:</h4>
+				{{#if this.interiorFeatures}}
+					{{#each this.interiorFeatures}}
+						<li class="content-data">{{this}}</li>
+					{{/each}}
+				{{else}}
+					<li class="content-data">No interior features available for this listing.</li>
+				{{/if}}
+			</ul>
+		</div>
+	</section>
 
-<section class="listing-info">
-	<div class="listing-info-images">
-		<i class="fa fa-chevron-right"></i>
-		<i class="fa fa-chevron-left"></i>
-		<img class="listing-info-images-image" src="{{this.photos.[0]}}" alt="">
-		<ul class="listing-info-images-thumbnails">
-			{{#each this.photos}}
-				<li class="listing-info-images-thumbnails-item"><img src="{{this}}" alt=""></li>
-			 {{/each}}
-		</ul>
-	</div>
-	<div class="listing-info-content">
-		<h3 class="listing-info-content-address">Address: <span class="content-data">{{this.address.full}}<br>{{this.address.city}}, TX - {{this.address.postalCode}}</span></h3>
-		<h3 class="listing-info-content-price">Price: <span class="content-data">${{this.listPrice}}</span></h3>
-		<ul class="listing-info-content-features">
-			<h4 class="listing-info-content-features-heading">Exterior Features:</h4>
-			{{#if this.exteriorFeatures}}
-				{{#each this.exteriorFeatures}}
-					<li class="content-data">{{this}}</li>
-				{{/each}}
-			{{else}}
-				<li class="content-data">No exterior features available for this listing.</li>
-			{{/if}}
-		</ul>
-		<ul class="listing-info-content-features">
-			<h4 class="listing-info-content-facts-heading">Interior:</h4>
-			{{#if this.interiorFeatures}}
-				{{#each this.interiorFeatures}}
-					<li class="content-data">{{this}}</li>
-				{{/each}}
-			{{else}}
-				<li class="content-data">No interior features available for this listing.</li>
-			{{/if}}
-		</ul>
-	</div>
-</section>
-
-<section class="listing-data">
-	<div class="listing-data-containers">
-		<div class="listing-data-census data-item">
-			<h3 class="listing-data-census-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Census Data</h3>
+	<section class="listing-data">
+		<div class="listing-data-containers">
+			<div class="listing-data-census data-item">
+				<h3 class="listing-data-census-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Census Data</h3>
+			</div>
+			<div class="listing-data-census-data data-view">
+				census data
+			</div>
+			<div class="listing-data-crime data-item">
+				<h3 class="listing-data-crime-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Crime Data</h3>
+			</div>
+			<div class="listing-data-crime-data data-view">
+				crime data
+			</div>
+			<div class="listing-data-schools data-item">
+				<h3 class="listing-data-schools-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Schools Data</h3>
+			</div>
+			<div class="listing-data-schools-data data-view">
+				schools data
+			</div>
+			<div class="listing-data-active data-item">
+				<h3 class="listing-data-active-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Active Profile</h3>
+			</div>
+			<div class="listing-data-active-data data-view">
+				active data
+			</div>
 		</div>
-		<div class="listing-data-census-data data-view">
-			census data
-		</div>
-		<div class="listing-data-crime data-item">
-			<h3 class="listing-data-crime-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Crime Data</h3>
-		</div>
-		<div class="listing-data-crime-data data-view">
-			crime data
-		</div>
-		<div class="listing-data-schools data-item">
-			<h3 class="listing-data-schools-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Schools Data</h3>
-		</div>
-		<div class="listing-data-schools-data data-view">
-			schools data
-		</div>
-		<div class="listing-data-active data-item">
-			<h3 class="listing-data-active-heading"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i>Active Profile</h3>
-		</div>
-		<div class="listing-data-active-data data-view">
-			active data
-		</div>
-	</div>
+	</section>
 </section>
 </div>

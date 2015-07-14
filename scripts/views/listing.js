@@ -15,6 +15,12 @@ export default Backbone.View.extend({
 	},
 
 	initialize: function() {
+		console.log('in init');
+		if (!Parse.User.current()) {
+			console.log('not logged in');
+		} else {
+			this.model.set('isUser', true);
+		}
 		if(this.model.attributes.property.exteriorFeatures) {
 			this.model.set('exteriorFeatures', this.model.attributes.property.exteriorFeatures.split(','));
 		}
@@ -63,9 +69,6 @@ export default Backbone.View.extend({
 	},
 
 	showData: function(event) {
-		if ((event.target).css('display') == 'none') {
-
-		}
 		$('.data-view').slideUp();
 		$('.fa-chevron-down').show();
     	$('.fa-chevron-up').hide();
