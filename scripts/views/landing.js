@@ -50,29 +50,46 @@ export default Backbone.View.extend({
 	renderChildren: function() {
 		this.areaMap.removeMarkers();
 		var self = this;
-		this.children = this.collection.map(function(child) {
+		if(!Parse.User.current()) {
+			this.children = this.collection.map(function(child) {
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
 				var lng = child.attributes.geo.lng;
-				// this.areaMap.drawOverlay({
-				//   lat: lat,
-				//   lng: lng,
-				//   model: child,
-			 //  	 click: function(e) {
-				// 	self.renderPopUp(this.model);
-				//   }
-				//   content: '<div class="overlay">' + child.attributes.listPrice + '</div>'
-				// });
 				this.areaMap.addMarker({
 					lat: lat,
 					lng: lng,
 					model: child,
 					click: function(e) {
 						self.renderPopUp(this.model);
-					}
-				});
-			}
-		}.bind(this));
+						}
+					});
+				}
+			}.bind(this));	
+		} else {
+			var userFilters = Parse.User.current().get('filters');
+			this.collection.minPrice = userFilters.minPrice;
+			this.collection.maxPrice = userFilters.maxPrice;
+			this.collection.bedrooms = userFilters.bedrooms;
+			this.collection.baths = userFilters.baths;
+			this.collection.minSq = userFilters.minSq;
+			this.collection.maxSq = userFilters.maxSq;
+			this.filteredCollection = new HomeCollection(this.collection.filteredCollection(this.collection));
+			this.collection = this.filteredCollection.clone();
+			this.children = this.collection.map(function(child) {
+			if (child.attributes.geo.lat && child.attributes.geo.lng) {
+				var lat = child.attributes.geo.lat;
+				var lng = child.attributes.geo.lng;
+				this.areaMap.addMarker({
+					lat: lat,
+					lng: lng,
+					model: child,
+					click: function(e) {
+						self.renderPopUp(this.model);
+						}
+					});
+				}
+			}.bind(this));
+		}
 		this.collection = this.originalCollection.clone();
 	},
 
