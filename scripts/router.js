@@ -65,7 +65,7 @@ var Router = Backbone.Router.extend({
 				$('#app').html(userView.el);
 			})
 		} else {
-			router.navigate('');
+			router.navigate('', true);
 		}
 	},
 

@@ -135,11 +135,11 @@ export default Backbone.View.extend({
 		user.set('username', username);
 		user.set('password', password);
 		user.set('homes', []);
-		user.set('filters', {});
+		user.set('filters', {minPrice: 0, maxPrice: 1000000000, bedrooms: 0, baths: 0, minSq: 0, maxSq: 1000000});
 		user.signUp(null, {
 			success: function(user) {
 				console.log(user);
-				router.navigate('', true);
+				router.navigate('#users', true);
 			},
 			error: function(user, error) {
 				alert('Error: registration unsuccessful due to ' + error);

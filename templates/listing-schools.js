@@ -1,10 +1,14 @@
 export default Backbone.View.extend({
 
-	template: JST['listing-data'],
+	template: JST['listing-schools'],
 	tagName: 'div',
-	className: 'census-data',
+	className: 'school-data',
 
-	initialize: function(options) {
+	events: {
+
+	},
+
+	initialize: function() {
 		this.render();
 	},
 

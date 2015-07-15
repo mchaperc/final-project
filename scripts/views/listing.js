@@ -1,5 +1,6 @@
 import router from '../router';
 import DataView from './data';
+import SchoolsView from './listing-schools';
 import {DemographicsCollection} from '../models/demographicsCollection';
 import {SchoolCollection} from '../models/schools';
 
@@ -22,7 +23,6 @@ export default Backbone.View.extend({
 			console.log('not logged in');
 		} else {
 			this.model.set('isUser', true);
-			this.user = options.user;
 		}
 		if(this.model.attributes.property.exteriorFeatures) {
 			this.model.set('exteriorFeatures', this.model.attributes.property.exteriorFeatures.split(','));
@@ -42,13 +42,17 @@ export default Backbone.View.extend({
 	renderData: function() {
 		var demographics = new DemographicsCollection();
 		demographics.fetch().then(function(data) {
-			// var demographicsColl = new DemographicsCollection(data);
-			// var dataView = new DataView({demographics: demographicsColl});
-			// this.$el.prepend(dataView.el);
+			var demographicsColl = new DemographicsCollection(data);
+			var dataView = new DataView({collection: demographicsColl});
+			$('.listing-data-containers').prepend(dataView.el);
 			console.log(data);
 		}.bind(this));
 		var schools = new SchoolCollection();
 		schools.fetch().then(function(data) {
+			var schoolsColl = new SchoolCollection(data);
+			var schoolsView = new SchoolsView({collection: schoolsColl});
+			$('.listing-data-containers').append(schoolsView.el);
+			console.log(data);
 			console.log(data);
 		}.bind(this));
 	},
@@ -98,14 +102,14 @@ export default Backbone.View.extend({
 			price: price,
 			image: image
 		}
-		var savedHomes = this.user.get('homes');
-		this.user.set('homes', savedHomes.concat(newHome));
-		this.user.save(null, {});
+		var savedHomes = Parse.User.current().get('homes');
+		Parse.User.current().set('homes', savedHomes.concat([newHome]));
+		Parse.User.current().save();
 		console.log(Parse.User.current());
 	},
 
 	toProfile: function() {
-		router.navigate('/users', true);
+		router.navigate('#users', true);
 	}
 
 })
