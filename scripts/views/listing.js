@@ -50,16 +50,16 @@ export default Backbone.View.extend({
 		var demographics = new DemographicsCollection();
 		demographics.fetch().then(function(data) {
 			var demographicsColl = new DemographicsCollection(data);
-			var dataView = new DataView({collection: demographicsColl});
+			var dataView = new DataView({collection: demographicsColl, model: this.model});
 			$('.listing-data-containers').prepend(dataView.el);
-			console.log(data);
+			// console.log(data);
 		}.bind(this));
 		var schools = new SchoolCollection();
 		schools.fetch().then(function(data) {
 			var schoolsColl = new SchoolCollection(data);
 			var schoolsView = new SchoolsView({collection: schoolsColl});
 			$('.listing-data-containers').append(schoolsView.el);
-			console.log(data);
+			// console.log(data);
 		}.bind(this));
 	},
 

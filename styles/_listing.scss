@@ -163,7 +163,7 @@
 	@include shift(1.5);
 	background-color: rgb(250,250,250);
 	display: inline-block;
-	height: 60%;
+	height: 100%;
 	overflow: scroll;
 	position: relative;
 }
@@ -197,7 +197,7 @@
 .listing-data-crime-data,
 .listing-data-schools-data,
 .listing-data-active-data {
-	background-color: $blue;
+	background-color: white;
 	color: rgb(250,250,250);
 	display: none;
 	position:relative;
@@ -208,4 +208,9 @@
 .listing-data-schools-heading,
 .listing-data-active-heading {
 	margin-left: 1em;
+}
+
+.highcharts-container {
+	margin: auto;
+	width: 100%;
 }

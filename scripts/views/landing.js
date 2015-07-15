@@ -21,6 +21,11 @@ export default Backbone.View.extend({
 		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
 		this.originalCollection = this.collection.clone();
 		this.searchLocation = this.searchLocation || options.search;
+		if(!Parse.User.current()) {
+			this.collection.isUser = false;
+		} else {
+			this.collection.isUser = true;
+		}
 		this.render(options);
 	},
 
@@ -135,7 +140,9 @@ export default Backbone.View.extend({
 		Parse.User.logIn(username, password, {
 		  success: function(user) {
 		    console.log(user);
-		    router.navigate('#users', true);
+			Parse.User.become(user.sessionToken).then(function(user) {
+			 router.navigate('#users', true);
+			});
 		  },
 		  error: function(user, error) {
 		    console.log(error);
@@ -156,7 +163,9 @@ export default Backbone.View.extend({
 		user.signUp(null, {
 			success: function(user) {
 				console.log(user);
-				router.navigate('#users', true);
+				Parse.User.become(user.sessionToken).then(function(user) {
+				 router.navigate('#users', true);
+				});
 			},
 			error: function(user, error) {
 				alert('Error: registration unsuccessful due to ' + error);
