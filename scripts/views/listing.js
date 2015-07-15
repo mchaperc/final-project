@@ -20,7 +20,7 @@ export default Backbone.View.extend({
 
 	initialize: function(options) {
 		if (!Parse.User.current()) {
-			console.log('not logged in');
+			this.model.set('isUser', false);
 		} else {
 			this.model.set('isUser', true);
 		}
@@ -35,6 +35,13 @@ export default Backbone.View.extend({
 	},
 
 	render: function() {
+		var homes = Parse.User.current().get('homes');
+		homes = homes.filter(function(home) {
+			return home.mlsId == this.model.get('mlsId');
+		}.bind(this));
+		if (homes.length > 0) {
+			this.model.set('isSaved', true);
+		}
 		this.$el.html(this.template(this.model.toJSON()));
 		this.renderData();
 	},
@@ -52,7 +59,6 @@ export default Backbone.View.extend({
 			var schoolsColl = new SchoolCollection(data);
 			var schoolsView = new SchoolsView({collection: schoolsColl});
 			$('.listing-data-containers').append(schoolsView.el);
-			console.log(data);
 			console.log(data);
 		}.bind(this));
 	},
@@ -90,22 +96,35 @@ export default Backbone.View.extend({
 	},
 
 	saveHome: function() {
-		var mlsId = this.model.get('mlsId');
-		var address = this.model.get('address');
-		address = address.full + ', ' + address.city + ', ' + 'TX';
-		var price = this.model.get('listPrice');
-		var image = this.model.get('photos');
-		image = image[0];
-		var newHome = {
-			mlsId: mlsId,
-			address: address,
-			price: price,
-			image: image
+		if (this.model.get('isSaved')) {
+			var savedHomes = Parse.User.current().get('homes');
+			savedHomes = savedHomes.filter(function(home) {
+				return home.mlsId != this.model.get('mlsId');
+			}.bind(this));
+			Parse.User.current().set('homes', savedHomes);
+			Parse.User.current().save();
+			this.model.set('isSaved', false);
+			this.render();
+			console.log(Parse.User.current());
+		} else {
+			var mlsId = this.model.get('mlsId');
+			var address = this.model.get('address');
+			address = address.full + ', ' + address.city + ', ' + 'TX';
+			var price = this.model.get('listPrice');
+			var image = this.model.get('photos');
+			image = image[0];
+			var newHome = {
+				mlsId: mlsId,
+				address: address,
+				price: price,
+				image: image
+			}
+			var savedHomes = Parse.User.current().get('homes');
+			Parse.User.current().set('homes', savedHomes.concat([newHome]));
+			Parse.User.current().save();
+			this.render();
+			console.log(Parse.User.current());
 		}
-		var savedHomes = Parse.User.current().get('homes');
-		Parse.User.current().set('homes', savedHomes.concat([newHome]));
-		Parse.User.current().save();
-		console.log(Parse.User.current());
 	},
 
 	toProfile: function() {

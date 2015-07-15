@@ -1,3 +1,5 @@
+{{log this.isSaved}}
+
 <div class="screen">
 <header class="listing-header">
 	<div class="listing-header-branding">
@@ -6,7 +8,7 @@
 	<ul class="listing-header-nav">
 		<a href="#"><li class="listing-header-nav-links"><i class="fa fa-home"></i> Home</li></a>
 		{{#if this.isUser}}
-			<li class="listing-header-nav-links save"><i class="fa fa-heart-o"></i> Save</li>
+			<li class="listing-header-nav-links save">{{#if isSaved}}<i class="fa fa-heart"></i> Saved{{else}}<i class="fa fa-heart-o"></i> Save{{/if}}</li>
 			<a href="#users"><li class="listing-header-nav-links user"><i class="fa fa-user"></i> My Profile</li></a>
 		{{/if}}
 	</ul>
