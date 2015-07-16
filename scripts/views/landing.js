@@ -145,7 +145,7 @@ export default Backbone.View.extend({
 			});
 		  },
 		  error: function(user, error) {
-		    console.log(error);
+		    alert(error);
 		  }
 		});
 	},

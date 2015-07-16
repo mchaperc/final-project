@@ -5,6 +5,7 @@ export default Backbone.View.extend({
 		console.log(this.demographics)
 		this.loadAge();
 		this.loadIncome();
+		this.loadCrime();
 	},
 
 	render: function() {
@@ -78,31 +79,93 @@ export default Backbone.View.extend({
 	},
 
 	loadIncome: function() {
-		var lessThan25 = this.demographics.IncomeLessThan25;
-		var between25to50 = this.demographics.IncomeBetween25to50;
-		var between50to100 = this.demographics.IncomeBetween50to100;
-		var between100to200 = this.demographics.IncomeBetween100to200;
-		var greaterThan200 = this.demographics.IncomeGreater200;
+		var lessThan25 = Number(this.demographics.IncomeLessThan25)*100;
+		var between25to50 = Number(this.demographics.IncomeBetween25to50)*100;
+		var between50to100 = Number(this.demographics.IncomeBetween50to100)*100;
+		var between100to200 = Number(this.demographics.IncomeBetween100to200)*100;
+		var greaterThan200 = Number(this.demographics.IncomeGreater200)*100;
 		$('#income').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
 	        title: {
-	            text: 'Individual Income Breakdown',
+	            text: 'Income by Population:'
+	        },
+	        xAxis: {
+	            categories: ['Less than 25k', '25-50k', '50k-100k', '100k-200k', 'More than 200k'],
+	            title: {
+	                text: null
+	            }
+	        },
+	        yAxis: {
+	            min: 0,
+	            tickInterval: 10,
+	            title: {
+	                text: 'Population (%)',
+	                align: 'high'
+	            },
+	            labels: {
+	                overflow: 'justify'
+	            }
+	        },
+	        plotOptions: {
+	            bar: {
+	                dataLabels: {
+	                    enabled: true
+	                }
+	            }
+	        },
+	        legend: {
+	            layout: 'vertical',
+	            align: 'right',
+	            verticalAlign: 'top',
+	            x: -40,
+	            y: 80,
+	            floating: true,
+	            borderWidth: 1,
+	            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+	            shadow: true
+	        },
+	        credits: {
+	            enabled: false
+	        },
+	        series: [{
+	            name: 'Income ($US)',
+	            data: [Number(lessThan25.toFixed(2)), Number(between25to50.toFixed(2)), Number(between50to100.toFixed(2)), Number(between100to200.toFixed(2)), Number(greaterThan200.toFixed(2))]
+
+	        }]
+	    });
+	},
+
+	loadCrime: function() {
+		var violentCrime = this.demographics.ViolentCrime;
+		var murderAndManslaughter = this.demographics.MurderAndManslaughter;
+		var forcibleRape = this.demographics.ForcibleRape;
+		var robbery = this.demographics.Robbery;
+		var aggravatedAssault = this.demographics.AggravatedAssault;
+		var propertyCrime = this.demographics.PropertyCrime;
+		var burglary = this.demographics.Burglary;
+		var larcenyTheft = this.demographics.LarcenyTheft;
+		var motorVehicleTheft = this.demographics.MotorVehicleTheft;
+		var arson = this.demographics.Arson;
+		$('#crime').highcharts({
+	        title: {
+	            text: 'Reported Crimes',
 	            x: -20 //center
 	        },
 	        xAxis: {
-	            categories: ['< 25k', '25-50k', '50k-100k', '100k-200k', '> 200k']
+	            categories: ['Violent Crime', 'Murder and Manslaughter', 'Rape', 'Robbery', 'Aggravated Assault', 'Property Crime', 'Burglary', 'Larceny/Theft', 'Motor Vehicle Theft', 'Arson']
 	        },
 	        yAxis: {
+	        	min: 0,
 	            title: {
-	                text: 'US Dollars ($)'
+	                text: 'Committed Crimes'
 	            },
 	            plotLines: [{
 	                value: 0,
 	                width: 1,
 	                color: '#808080'
 	            }]
-	        },
-	        tooltip: {
-	            valuePrefix: '$'
 	        },
 	        legend: {
 	            layout: 'vertical',
@@ -111,8 +174,8 @@ export default Backbone.View.extend({
 	            borderWidth: 0
 	        },
 	        series: [{
-	            name: 'Income',
-	            data: [lessThan25, between25to50, between50to100, between100to200, greaterThan200]
+	            name: 'Crime Rates',
+	            data: [violentCrime, murderAndManslaughter, forcibleRape, robbery, aggravatedAssault, propertyCrime, burglary, larcenyTheft, motorVehicleTheft, arson]
 	        }]
 	    });
 	}

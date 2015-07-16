@@ -31,6 +31,7 @@ export default Backbone.View.extend({
 			this.model.set('interiorFeatures', this.model.attributes.property.interiorFeatures.split(','));
 		}
 		this.listPrice();
+		console.log(this.model);
 		this.render();
 	},
 
@@ -47,14 +48,15 @@ export default Backbone.View.extend({
 	},
 
 	renderData: function() {
-		var demographics = new DemographicsCollection();
+		var zipcode = this.model.attributes.address.postalCode;
+		var demographics = new DemographicsCollection({zipcode: zipcode});
 		demographics.fetch().then(function(data) {
 			var demographicsColl = new DemographicsCollection(data);
 			var dataView = new DataView({collection: demographicsColl, model: this.model});
 			$('.listing-data-containers').prepend(dataView.el);
 			// console.log(data);
 		}.bind(this));
-		var schools = new SchoolCollection();
+		var schools = new SchoolCollection({zipcode: zipcode});
 		schools.fetch().then(function(data) {
 			var schoolsColl = new SchoolCollection(data);
 			var schoolsView = new SchoolsView({collection: schoolsColl});

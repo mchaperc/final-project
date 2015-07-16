@@ -79,7 +79,6 @@
 	display: inline-block;
 	height: 100%;
 	overflow: scroll;
-	padding-bottom: 2em;
 }
 
 .listing-info-images {
@@ -166,6 +165,11 @@
 	height: 100%;
 	overflow: scroll;
 	position: relative;
+}
+
+.listing-data-containers {
+	border-top: 2px solid $blue;
+	margin-top: 2em;
 }
 
 .data-item {
