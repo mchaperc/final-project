@@ -28,27 +28,31 @@ var Router = Backbone.Router.extend({
 		$('#app').addClass('landing');
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
-		}).then(function(position) {
-			return position;
 		});
 		Promise.resolve(this.myLocation).then(function(value) {
 			this.homes.fetch().then(function(data) {
-				var searchLocation = new SearchLocation();
-				this.homesColl = new HomeCollection(data);
+				var searchLocation = new SearchLocation(value);
 				if (Parse.User.current()) {
 					var user = new User();
-					this.LandingView = new LandingView({collection: this.homesColl, 
-													myLocation: value, 
-													search: searchLocation,
-													user: user});
+					if (this.landingView) {
+						this.landingView.rerender();
+					} else {
+						this.landingView = new LandingView({collection: this.homes,
+															search: searchLocation,
+															user: user});
+					}
 				} else {
 					var users = new UserCollection();
-					this.LandingView = new LandingView({collection: this.homesColl, 
-													myLocation: value, 
-													search: searchLocation,
-													users: users});
+					if (this.landingView) {
+						this.landingView.rerender();
+					} else {
+						this.landingView = new LandingView({collection: this.homes, 
+															search: searchLocation,
+															users: users});
+					}
 				}
-				$('#app').html(this.LandingView.el);
+				$('.sk-circle').remove();
+				$('#app').append(this.landingView.el);
 			}.bind(this))
 		}.bind(this));
 	},

@@ -18,42 +18,40 @@ export default Backbone.View.extend({
 
 
 	initialize: function(options) {
-		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
-		this.originalCollection = this.collection.clone();
-		this.searchLocation = this.searchLocation || options.search;
-		if(!Parse.User.current()) {
-			localStorage.setItem('isUser', false);
-		} else {
-			localStorage.setItem('isUser', true);
-		}
-		this.render(options);
-		console.log(this.collection.isUser);
+		this.search = options.search;
+		console.log('search', this.search);
+		this.render();
 	},
 
-	render: function(options) {
-		this.$el.html(this.template(this.collection.toJSON()));
+	render: function() {
+		this.$el.html(this.template());
 
 		// Once more MLS data is available, this will be based on geolocation 
 		// and NOT hardcoded coordinates
-
-		var lat = this.searchLocation.get('lat') || '29.7604';
-		var lng = this.searchLocation.get('lng') || '-95.3698';
-
-		if(this.areaMap) {
-			this.areaMap.setCenter(lat, lng);
-		} else {
-			this.areaMap = new GMaps({
-			  div: '#app',
-			  lat: lat,
-			  lng: lng,
+		
+		if(!this.areaMap) {
+		  this.areaMap = new GMaps({
+			  el: '#app',
+			  lat: '0',
+			  lng: '0',
 			  zoom: 10
 			});
 		}
+		this.rerender();
+	},
+
+    rerender: function() {
+    	console.log('rerender');
+		this.lat = this.search.get('lat') || '29.7604';
+		this.lng = this.search.get('lng') || '-95.3698';
+
+		this.areaMap.setCenter(this.lat, this.lng);
 
 		this.renderChildren();
 	},
 
 	renderChildren: function() {
+		console.log('renderChildre');
 		this.areaMap.removeMarkers();
 		var self = this;
 		if(!Parse.User.current()) {
@@ -80,7 +78,7 @@ export default Backbone.View.extend({
 			this.collection.minSq = userFilters.minSq;
 			this.collection.maxSq = userFilters.maxSq;
 			this.filteredCollection = new HomeCollection(this.collection.filteredCollection(this.collection));
-			this.collection = this.filteredCollection.clone();
+			// this.collection = this.filteredCollection.clone();
 			this.children = this.collection.map(function(child) {
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
@@ -96,7 +94,7 @@ export default Backbone.View.extend({
 				}
 			}.bind(this));
 		}
-		this.collection = this.originalCollection.clone();
+		// this.collection = this.originalCollection.clone();
 	},
 
 	remove: function(){

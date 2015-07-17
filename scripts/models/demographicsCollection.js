@@ -1,7 +1,7 @@
 var DemographicsCollection = Backbone.Collection.extend({
 
 	url: function() {
-		return '//localhost:5000/demo/' + this.zipcode;
+		return 'http://localhost:5000/demo/' + this.zipcode;
 	},
 	
 	initialize: function(options) {

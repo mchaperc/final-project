@@ -4,7 +4,8 @@ export default Backbone.View.extend({
 	className: 'screen',
 
 	events: {
-		'click .popup .fa-close': 'closePopUp'
+		'click .popup .fa-close': 'closePopUp',
+		'click a': 'closePopUp'
 	},
 
 	initialize: function() {

@@ -20,31 +20,8 @@ export default Backbone.View.extend({
 		'click .fa-chevron-right': 'forwardOne'
 	},
 
-	backOne: function() {
-		if (this.model.get('currentPhoto') == this.model.attributes.photos[0]) {
-			this.model.set('currentPhoto', this.model.attributes.photos[this.model.attributes.photos.length - 1]);
-			this.render();
-		} else {
-			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
-			picIndex -= 1;
-			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
-			this.render();
-		}
-	},
-
-	forwardOne: function() {
-		if (this.model.get('currentPhoto') == this.model.attributes.photos[this.model.attributes.photos.length - 1]) {
-			this.model.set('currentPhoto', this.model.attributes.photos[0]);
-			this.render();
-		} else {
-			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
-			picIndex += 1;
-			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
-			this.render();
-		}
-	},
-
 	initialize: function(options) {
+		$('.popup').remove();
 		if (!Parse.User.current()) {
 			this.model.set('isUser', false);
 		} else {
@@ -63,12 +40,14 @@ export default Backbone.View.extend({
 	},
 
 	render: function() {
-		var homes = Parse.User.current().get('homes');
-		homes = homes.filter(function(home) {
-			return home.mlsId == this.model.get('mlsId');
-		}.bind(this));
-		if (homes.length > 0) {
-			this.model.set('isSaved', true);
+		if(Parse.User.current()) {
+			var homes = Parse.User.current().get('homes');
+			homes = homes.filter(function(home) {
+				return home.mlsId == this.model.get('mlsId');
+			}.bind(this));
+			if (homes.length > 0) {
+				this.model.set('isSaved', true);
+			}
 		}
 		this.$el.html(this.template(this.model.toJSON()));
 		this.renderData();
@@ -76,13 +55,14 @@ export default Backbone.View.extend({
 
 	renderData: function() {
 		var zipcode = this.model.attributes.address.postalCode;
-		var demographics = new DemographicsCollection({zipcode: zipcode});
-		demographics.fetch().then(function(data) {
-			var demographicsColl = new DemographicsCollection(data);
-			var dataView = new DataView({collection: demographicsColl, model: this.model});
-			$('.listing-data-containers').prepend(dataView.el);
-			// console.log(data);
-		}.bind(this));
+		// var demographics = new DemographicsCollection({zipcode: zipcode});
+		// demographics.fetch().then(function(data) {
+		// 	console.log('in demo fetch');
+		// 	var demographicsColl = new DemographicsCollection(data);
+		// 	var dataView = new DataView({collection: demographicsColl, model: this.model});
+		// 	$('.listing-data-containers').prepend(dataView.el);
+		// 	console.log(data);
+		// }.bind(this));
 		var schools = new SchoolCollection({zipcode: zipcode});
 		schools.fetch().then(function(data) {
 			var schoolsColl = new SchoolCollection(data);
@@ -158,6 +138,30 @@ export default Backbone.View.extend({
 
 	toProfile: function() {
 		router.navigate('#users', true);
-	}
+	},
+
+	backOne: function() {
+		if (this.model.get('currentPhoto') == this.model.attributes.photos[0]) {
+			this.model.set('currentPhoto', this.model.attributes.photos[this.model.attributes.photos.length - 1]);
+			this.render();
+		} else {
+			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
+			picIndex -= 1;
+			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
+			this.render();
+		}
+	},
+
+	forwardOne: function() {
+		if (this.model.get('currentPhoto') == this.model.attributes.photos[this.model.attributes.photos.length - 1]) {
+			this.model.set('currentPhoto', this.model.attributes.photos[0]);
+			this.render();
+		} else {
+			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
+			picIndex += 1;
+			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
+			this.render();
+		}
+	},
 
 })
