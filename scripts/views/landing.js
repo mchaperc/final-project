@@ -22,11 +22,12 @@ export default Backbone.View.extend({
 		this.originalCollection = this.collection.clone();
 		this.searchLocation = this.searchLocation || options.search;
 		if(!Parse.User.current()) {
-			this.collection.isUser = false;
+			localStorage.setItem('isUser', false);
 		} else {
-			this.collection.isUser = true;
+			localStorage.setItem('isUser', true);
 		}
 		this.render(options);
+		console.log(this.collection.isUser);
 	},
 
 	render: function(options) {
@@ -118,6 +119,9 @@ export default Backbone.View.extend({
 
 	submitFilter: function(e) {
 		e.preventDefault();
+		if (Parse.User.current()) {
+			this.updateFilters();
+		}
 		this.collection.minPrice = $('.filter-price-min-input').val() || 0;
 		this.collection.maxPrice = $('.filter-price-max-input').val() || 100000000;
 		this.collection.bedrooms = $('.filter-bedrooms-input').val() || 0;
@@ -127,6 +131,27 @@ export default Backbone.View.extend({
 		this.filteredCollection = new HomeCollection(this.collection.filteredCollection(this.collection));
 		this.collection = this.filteredCollection.clone();
 		this.render();
+	},
+
+	updateFilters: function() {
+		var minPrice = $('.filter-price-min-input').val() || 0;
+		var maxPrice = $('.filter-price-max-input').val() || 100000000;
+		var bedrooms = $('.filter-bedrooms-input').val() || 0;
+		var baths = $('.filter-bathrooms-input').val() || 0;
+		var minSq = $('.filter-sqft-min-input').val() || 0;
+		var maxSq = $('.filter-sqft-max-input').val() || 10000000;
+		var updatedFilters = {
+			minPrice: minPrice, 
+			maxPrice: maxPrice, 
+			bedrooms: bedrooms, 
+			baths: baths, 
+			minSq: minSq, 
+			maxSq: maxSq
+		}
+		console.log(updatedFilters);
+		Parse.User.current().set('filters', updatedFilters);
+		Parse.User.current().save();
+		console.log(Parse.User.current());
 	},
 
 	renderPopUp: function(model) {

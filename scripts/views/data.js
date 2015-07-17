@@ -2,7 +2,6 @@ export default Backbone.View.extend({
 
 	initialize: function(options) {
 		this.demographics = this.collection.models[0].attributes.data.d[0];
-		console.log(this.demographics)
 		this.loadAge();
 		this.loadIncome();
 		this.loadCrime();

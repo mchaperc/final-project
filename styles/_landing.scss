@@ -1,7 +1,16 @@
 .landing {
-	background-image: url('../../img/us.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-color: $blue;
+	height: 100%;
+	margin-top: 0;
+}
+
+.sk-circle {
+	margin: auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 100px;
+	width: 100px;
 }
 
 .site-nav {

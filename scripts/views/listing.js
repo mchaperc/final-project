@@ -15,7 +15,33 @@ export default Backbone.View.extend({
 		'click .listing-info-images-thumbnails-item': 'changeImage',
 		'click .home': 'home',
 		'click .save': 'saveHome',
-		'click .user': 'toProfile'
+		'click .user': 'toProfile',
+		'click .fa-chevron-left': 'backOne',
+		'click .fa-chevron-right': 'forwardOne'
+	},
+
+	backOne: function() {
+		if (this.model.get('currentPhoto') == this.model.attributes.photos[0]) {
+			this.model.set('currentPhoto', this.model.attributes.photos[this.model.attributes.photos.length - 1]);
+			this.render();
+		} else {
+			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
+			picIndex -= 1;
+			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
+			this.render();
+		}
+	},
+
+	forwardOne: function() {
+		if (this.model.get('currentPhoto') == this.model.attributes.photos[this.model.attributes.photos.length - 1]) {
+			this.model.set('currentPhoto', this.model.attributes.photos[0]);
+			this.render();
+		} else {
+			var picIndex = this.model.get('photos').indexOf(this.model.get('currentPhoto'));
+			picIndex += 1;
+			this.model.set('currentPhoto', this.model.attributes.photos[picIndex]);
+			this.render();
+		}
 	},
 
 	initialize: function(options) {
@@ -30,8 +56,9 @@ export default Backbone.View.extend({
 		if(this.model.attributes.property.interiorFeatures) {
 			this.model.set('interiorFeatures', this.model.attributes.property.interiorFeatures.split(','));
 		}
+		var currentPhoto = this.model.get('currentPhoto')
+		this.model.set('currentPhoto', currentPhoto || this.model.attributes.photos[0]);
 		this.listPrice();
-		console.log(this.model);
 		this.render();
 	},
 
@@ -61,7 +88,7 @@ export default Backbone.View.extend({
 			var schoolsColl = new SchoolCollection(data);
 			var schoolsView = new SchoolsView({collection: schoolsColl});
 			$('.listing-data-containers').append(schoolsView.el);
-			// console.log(data);
+			console.log(data);
 		}.bind(this));
 	},
 
