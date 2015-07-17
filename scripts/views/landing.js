@@ -19,29 +19,31 @@ export default Backbone.View.extend({
 
 	initialize: function(options) {
 		this.search = options.search;
-		console.log('search', this.search);
 		this.render();
 	},
 
 	render: function() {
+
 		this.$el.html(this.template());
 
 		// Once more MLS data is available, this will be based on geolocation 
 		// and NOT hardcoded coordinates
-		
-		if(!this.areaMap) {
+
+		// if(!this.areaMap) {
 		  this.areaMap = new GMaps({
 			  el: '#app',
 			  lat: '0',
 			  lng: '0',
 			  zoom: 10
 			});
-		}
+		// }
+
 		this.rerender();
+		
 	},
 
     rerender: function() {
-    	console.log('rerender');
+
 		this.lat = this.search.get('lat') || '29.7604';
 		this.lng = this.search.get('lng') || '-95.3698';
 
@@ -51,7 +53,6 @@ export default Backbone.View.extend({
 	},
 
 	renderChildren: function() {
-		console.log('renderChildre');
 		this.areaMap.removeMarkers();
 		var self = this;
 		if(!Parse.User.current()) {

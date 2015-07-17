@@ -35,7 +35,7 @@ var Router = Backbone.Router.extend({
 				if (Parse.User.current()) {
 					var user = new User();
 					if (this.landingView) {
-						this.landingView.rerender();
+						this.landingView.render();
 					} else {
 						this.landingView = new LandingView({collection: this.homes,
 															search: searchLocation,
@@ -44,7 +44,7 @@ var Router = Backbone.Router.extend({
 				} else {
 					var users = new UserCollection();
 					if (this.landingView) {
-						this.landingView.rerender();
+						this.landingView.render();
 					} else {
 						this.landingView = new LandingView({collection: this.homes, 
 															search: searchLocation,
