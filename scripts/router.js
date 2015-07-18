@@ -16,7 +16,7 @@ var Router = Backbone.Router.extend({
 	},
 
 	initialize: function() {
-		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'emZaIAgysn8nKGxKO8lYRchGqGko99VlAwbOSHRe');
+		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
 		this.homes = new HomeCollection();
 		this.homes.fetch();
 	},

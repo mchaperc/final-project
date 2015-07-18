@@ -18,6 +18,9 @@ export default Backbone.View.extend({
 
 
 	initialize: function(options) {
+
+		this.originalCollection = this.collection.clone();
+		
 		this.search = options.search;
 		this.render();
 	},
@@ -26,23 +29,21 @@ export default Backbone.View.extend({
 
 		this.$el.html(this.template());
 
-		// Once more MLS data is available, this will be based on geolocation 
-		// and NOT hardcoded coordinates
-
-		// if(!this.areaMap) {
-		  this.areaMap = new GMaps({
-			  el: '#app',
-			  lat: '0',
-			  lng: '0',
-			  zoom: 10
-			});
-		// }
+		this.areaMap = new GMaps({
+		  el: '#app',
+		  lat: '0',
+		  lng: '0',
+		  zoom: 10
+		});
 
 		this.rerender();
-		
+
 	},
 
     rerender: function() {
+
+    	// Once more MLS data is available, this will be based on geolocation 
+		// and NOT hardcoded coordinates
 
 		this.lat = this.search.get('lat') || '29.7604';
 		this.lng = this.search.get('lng') || '-95.3698';
@@ -79,7 +80,7 @@ export default Backbone.View.extend({
 			this.collection.minSq = userFilters.minSq;
 			this.collection.maxSq = userFilters.maxSq;
 			this.filteredCollection = new HomeCollection(this.collection.filteredCollection(this.collection));
-			// this.collection = this.filteredCollection.clone();
+			this.collection = this.filteredCollection.clone();
 			this.children = this.collection.map(function(child) {
 			if (child.attributes.geo.lat && child.attributes.geo.lng) {
 				var lat = child.attributes.geo.lat;
@@ -95,7 +96,7 @@ export default Backbone.View.extend({
 				}
 			}.bind(this));
 		}
-		// this.collection = this.originalCollection.clone();
+		this.collection = this.originalCollection.clone();
 	},
 
 	remove: function(){
@@ -164,12 +165,11 @@ export default Backbone.View.extend({
 		Parse.User.logIn(username, password, {
 		  success: function(user) {
 		    console.log(user);
-			Parse.User.become(user.sessionToken).then(function(user) {
-			 router.navigate('#users', true);
-			});
+			router.navigate('#users', true);
 		  },
 		  error: function(user, error) {
-		    alert(error);
+		    alert(error.message);
+		    console.log(error);
 		  }
 		});
 	},
@@ -192,8 +192,8 @@ export default Backbone.View.extend({
 				});
 			},
 			error: function(user, error) {
-				alert('Error: registration unsuccessful due to ' + error);
-				console.log(error);
+				alert('Error: registration unsuccessful due to: ' + error.message);
+				console.log(error.message);
 			}
 		});
 	}
