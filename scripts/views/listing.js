@@ -65,10 +65,9 @@ export default Backbone.View.extend({
 		// }.bind(this));
 		var schools = new SchoolCollection({zipcode: zipcode});
 		schools.fetch().then(function(data) {
-			var schoolsColl = new SchoolCollection(data);
-			var schoolsView = new SchoolsView({collection: schoolsColl});
+			var schoolsView = new SchoolsView({collection: schools});
 			$('.listing-data-containers').append(schoolsView.el);
-			console.log(data);
+			// console.log(schools);
 		}.bind(this));
 	},
 

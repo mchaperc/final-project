@@ -218,3 +218,22 @@
 	margin: auto;
 	width: 100%;
 }
+
+.elementary-data,
+.middle-data,
+.high-data {
+	color: black;
+}
+
+.elementary-data-basic-heading,
+.middle-data-basic-heading,
+.high-data-basic-heading {
+	font-size: 1.2em;
+	padding: 1em;
+}
+
+.elementary-data-basic-heading img,
+.middle-data-basic-heading img,
+.high-data-basic-heading img {
+	vertical-align: middle;
+}
