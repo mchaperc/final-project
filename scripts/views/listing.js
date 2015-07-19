@@ -55,14 +55,14 @@ export default Backbone.View.extend({
 
 	renderData: function() {
 		var zipcode = this.model.attributes.address.postalCode;
-		// var demographics = new DemographicsCollection({zipcode: zipcode});
-		// demographics.fetch().then(function(data) {
-		// 	console.log('in demo fetch');
-		// 	var demographicsColl = new DemographicsCollection(data);
-		// 	var dataView = new DataView({collection: demographicsColl, model: this.model});
-		// 	$('.listing-data-containers').prepend(dataView.el);
-		// 	console.log(data);
-		// }.bind(this));
+		var demographics = new DemographicsCollection({zipcode: zipcode});
+		demographics.fetch().then(function(data) {
+			console.log('in demo fetch');
+			var demographicsColl = new DemographicsCollection(data);
+			var dataView = new DataView({collection: demographicsColl, model: this.model});
+			$('.listing-data-containers').prepend(dataView.el);
+			console.log(data);
+		}.bind(this));
 		var schools = new SchoolCollection({zipcode: zipcode});
 		schools.fetch().then(function(data) {
 			var schoolsView = new SchoolsView({collection: schools});

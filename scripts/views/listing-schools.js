@@ -1,36 +1,35 @@
+import ElementaryView from './elementary';
+import MiddleView from './middle';
+import HighView from './high';
+
 export default Backbone.View.extend({
 
-	template: JST['listing-schools'],
-	tagName: 'div',
-	className: 'listing-data-schools-data data-view',
-
-	events: {
-
-	},
-
 	initialize: function() {
-		this.render();
+		this.loadElementaryRating();
 		this.loadElementaryScores();
-		// console.log(this.collection.models[0].attributes.elementaryScores);
 		this.loadElementaryTeachers();
+		this.loadMiddleRating();
+		this.loadMiddleScores();
+		this.loadMiddleTeachers();
+		this.loadHighRating();
+		this.loadHighScores();
+		this.loadHighTeachers();
 	},
 
-	render: function() {
-		this.$el.html(this.template(this.collection.toJSON()));
+	loadElementaryRating: function() {
+		var elementaryView = new ElementaryView({collection: this.collection});
+		$('.elementary-data').prepend(elementaryView.el);
 	},
 
 	loadElementaryScores: function() {
 		var elementaryScores = this.collection.models[0].attributes.elementaryScores;
-		console.log(elementaryScores);
 		var categories = _.map(elementaryScores.school, function(item) {
 			return item.grade + ': ' + item.subject;
 		})
 		var results = _.map(elementaryScores.school, function(item) {
 			return item.score.percentage;
 		});
-		console.log(results);
-		console.log(categories);
-		$('#age').highcharts({
+		$('#elementary-data-tests').highcharts({
 			colors: ['#0d233a'],
 	        chart: {
 	            type: 'column'
@@ -79,7 +78,6 @@ export default Backbone.View.extend({
 		var categories = _.map(elementaryTeachers.school, function(item) {
 			return item.stat_name + ': ' + item.stat_type;
 		});
-		console.log(categories);
 		var results = _.map(elementaryTeachers.school, function(item) {
 			if(item.percentage != null) {
 				return item.percentage;
@@ -87,8 +85,229 @@ export default Backbone.View.extend({
 				return item.total;
 			}
 		});
-		console.log(results);
-		$('#income').highcharts({
+		$('#elementary-data-teachers').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: 'Teacher Statistics'
+	        },
+	        subtitle: {
+	            text: 'Source: Education.com'
+	        },
+	        xAxis: {
+	            categories: categories,
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: 'Number/Percentage'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: 'Stats',
+	            data: results
+
+	        }]
+	    });
+	},
+
+	loadMiddleRating: function() {
+		var middleView = new MiddleView({collection: this.collection});
+		$('.middle-data').prepend(middleView.el);
+	},
+
+	loadMiddleScores: function() {
+		var middleScores = this.collection.models[0].attributes.middleScores;
+		var categories = _.map(middleScores.school, function(item) {
+			return item.grade + ': ' + item.subject;
+		})
+		var results = _.map(middleScores.school, function(item) {
+			return item.score.percentage;
+		});
+		$('#middle-data-tests').highcharts({
+			colors: ['#0d233a'],
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: middleScores.school[0].testname
+	        },
+	        subtitle: {
+	            text: 'Source: Education.com'
+	        },
+	        xAxis: {
+	            categories: categories,
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            max: 100,
+	            title: {
+	                text: 'Passing Rate (%)'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: 'Percentage',
+	            data: results
+
+	        }]
+	    });
+	},
+
+	loadMiddleTeachers: function() {
+		var middleTeachers = this.collection.models[0].attributes.middleTeachers;
+		var categories = _.map(middleTeachers.school, function(item) {
+			return item.stat_name + ': ' + item.stat_type;
+		});
+		var results = _.map(middleTeachers.school, function(item) {
+			if(item.percentage != null) {
+				return item.percentage;
+			} else {
+				return item.total;
+			}
+		});
+		$('#middle-data-teachers').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: 'Teacher Statistics'
+	        },
+	        subtitle: {
+	            text: 'Source: Education.com'
+	        },
+	        xAxis: {
+	            categories: categories,
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: 'Number/Percentage'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: 'Stats',
+	            data: results
+
+	        }]
+	    });
+	},
+
+	loadHighRating: function() {
+		var highView = new HighView({collection: this.collection});
+		$('.high-data').prepend(highView.el);
+	},
+
+	loadHighScores: function() {
+		var highScores = this.collection.models[0].attributes.highScores;
+		var categories = _.map(highScores.school, function(item) {
+			return item.grade + ': ' + item.subject;
+		})
+		var results = _.map(highScores.school, function(item) {
+			return item.score.percentage;
+		});
+		$('#high-data-tests').highcharts({
+			colors: ['#0d233a'],
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: highScores.school[0].testname
+	        },
+	        subtitle: {
+	            text: 'Source: Education.com'
+	        },
+	        xAxis: {
+	            categories: categories,
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            max: 100,
+	            title: {
+	                text: 'Passing Rate (%)'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: 'Percentage',
+	            data: results
+
+	        }]
+	    });
+	},
+
+	loadHighTeachers: function() {
+		var highTeachers = this.collection.models[0].attributes.highTeachers;
+		var categories = _.map(highTeachers.school, function(item) {
+			return item.stat_name + ': ' + item.stat_type;
+		});
+		var results = _.map(highTeachers.school, function(item) {
+			if(item.percentage != null) {
+				return item.percentage;
+			} else {
+				return item.total;
+			}
+		});
+		$('#high-data-teachers').highcharts({
 	        chart: {
 	            type: 'column'
 	        },
