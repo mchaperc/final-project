@@ -237,3 +237,23 @@
 .high-data-basic-heading img {
 	vertical-align: middle;
 }
+
+@include media(max-width $mobile) {
+	.listing-header {
+		width: 100%;
+	}	
+	.listing-header-branding {
+		display: none;
+	}
+	.listing-header-nav {
+		@include span-columns(12);
+		@include shift(0);
+	}
+	.listing-header-nav span {
+		display: none;
+	}
+	.listing-info {
+		@include span-columns(12);
+		@include shift(0);
+	}
+}
