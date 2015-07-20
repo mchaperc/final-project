@@ -1,4 +1,9 @@
 .landing {
+	height: 100%;
+	margin-top: 0;
+}
+
+.loading-container {
 	background-color: $blue;
 	height: 100%;
 	margin-top: 0;
@@ -59,6 +64,11 @@
 }
 
 .site-nav-item:hover {
+	transition: all .3s ease;
+	width: 100%;
+}
+
+.site-nav-item:active {
 	transition: all .3s ease;
 	width: 100%;
 }
@@ -201,7 +211,7 @@
 }
 
 .site-nav-item-sources-text {
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 }
 
 .site-nav-item:nth-child(3):hover .site-nav-item-sources {
@@ -253,7 +263,7 @@
 	border: none;
 	border-radius: 3px;
 	font-size: 1em;
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 	padding-left: .3em;
 	width: 5%;
 }
@@ -282,6 +292,27 @@
 	cursor: pointer;
 }
 
+.profile-link {
+	background-color: rgba(50,50,50,.7);
+	border-radius: 5px;
+	color: white;
+	opacity: 0;
+	height: 30px;
+	position: absolute;
+	left: 40%;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: all .5s ease;
+	width: 20%;
+}
+
+.profile-link:hover {
+	background-color: rgba(20,20,20,.9);
+}
+
 .login {
 	font-size: 1.2em;
 	height: 90%;
@@ -292,7 +323,7 @@
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 30%;
+	width: 50%;
 }
 
 .site-nav-item-login-heading {
@@ -304,9 +335,9 @@
 	transform: translateY(-50%);
 }
 
-.site-nav-item:nth-child(5):hover .login {
-	opacity: 1;
-}
+// .site-nav-item:nth-child(5):hover .login {
+// 	opacity: 1;
+// }
 
 .login-heading {
 	color: white;
@@ -316,10 +347,11 @@
 
 .login input {
 	border: none;
-	display: block;
+	display: inline-block;
 	font-size: 1em;
 	margin: 1px auto;
-	width: 80%;
+	text-align: center;
+	width: 40%;
 }
 
 .login-submit {
@@ -328,7 +360,8 @@
 	color: $red;
 	font-size: 1em;
 	margin: auto;
-	width: 80%;
+	margin-top: .2em;
+	width: 40%;
 }
 
 .login-submit:hover {

@@ -1,6 +1,7 @@
 import LandingView from './views/landing';
 import ListingView from './views/listing';
 import UserView from './views/user';
+import LoadingView from './views/loading';
 import {HomeCollection} from './models/homes';
 import {SearchLocation} from './models/location';
 import {User, UserCollection} from './models/users';
@@ -22,10 +23,11 @@ var Router = Backbone.Router.extend({
 	},
 
 	index: function() {
-		$('#app').html('<div class="sk-circle">' + '<div class="sk-circle1 sk-child"></div>' + '<div class="sk-circle2 sk-child"></div>' + '<div class="sk-circle3 sk-child"></div>' + '<div class="sk-circle4 sk-child"></div>' + '<div class="sk-circle5 sk-child"></div>' + '<div class="sk-circle6 sk-child"></div>' + '<div class="sk-circle7 sk-child"></div>' + '<div class="sk-circle8 sk-child"></div>' + '<div class="sk-circle9 sk-child"></div>' + '<div class="sk-circle10 sk-child"></div>' + '<div class="sk-circle11 sk-child"></div>' + '<div class="sk-circle12 sk-child"></div>' + '</div>');
 		$('#app').removeClass('listing');
 		$('#app').removeClass('users');
 		$('#app').addClass('landing');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
 		});
@@ -34,22 +36,15 @@ var Router = Backbone.Router.extend({
 				var searchLocation = new SearchLocation(value);
 				if (Parse.User.current()) {
 					var user = new User();
-					if (this.landingView) {
-						this.landingView.render();
-					} else {
-						this.landingView = new LandingView({collection: this.homes,
-															search: searchLocation,
-															user: user});
-					}
+					this.landingView = new LandingView({collection: this.homes,
+														search: searchLocation,
+														user: user}, {isUser: true});
 				} else {
 					var users = new UserCollection();
-					if (this.landingView) {
-						this.landingView.render();
-					} else {
-						this.landingView = new LandingView({collection: this.homes, 
-															search: searchLocation,
-															users: users});
-					}
+					this.landingView = new LandingView({collection: this.homes, 
+														search: searchLocation,
+														users: users},
+														{isUser: false});
 				}
 				$('.sk-circle').remove();
 				$('#app').append(this.landingView.el);
@@ -58,7 +53,8 @@ var Router = Backbone.Router.extend({
 	},
 
 	users: function() {
-		$('#app').html('');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		$('#app').removeClass('listing');
 		$('#app').addClass('users');
 		if (Parse.User.current()) {
@@ -67,6 +63,9 @@ var Router = Backbone.Router.extend({
 				var user = Parse.User.current();
 				var userView = new UserView({model: user, collection: homesColl});
 				$('#app').html(userView.el);
+				$('#app').removeClass('landing');
+				$('#app').removeClass('users');
+				$('#app').addClass('listing');
 			})
 		} else {
 			router.navigate('', true);
@@ -74,10 +73,8 @@ var Router = Backbone.Router.extend({
 	},
 
 	listing: function(id) {
-		$('#app').html('');
-		$('#app').removeClass('landing');
-		$('#app').removeClass('users');
-		$('#app').addClass('listing');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {
 			var homesColl = new HomeCollection(data);
@@ -89,6 +86,9 @@ var Router = Backbone.Router.extend({
 			}
 			this.listingView = new ListingView({model: home, collection: homesColl, user: user});
 			$('#app').html(this.listingView.el);
+			$('#app').removeClass('landing');
+			$('#app').removeClass('users');
+			$('#app').addClass('listing');
 		}.bind(this));
 	}
 

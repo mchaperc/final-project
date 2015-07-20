@@ -1,8 +1,11 @@
+{{log this}}
+
 <div id="map"></div>
 
 <ul class="site-nav">
 
 <li class="site-nav-item">
+  <i class="fa fa-close mobile-close"></i>
   <h3 class="site-nav-item-search-heading"><i class="fa fa-search"></i></h3>
   <div class="site-nav-item-search">
     <h3 class="site-nav-item-search-text">Search for homes near:</h3>
@@ -25,6 +28,7 @@
   </div>
 </li>
 <li class="site-nav-item">
+  <i class="fa fa-close mobile-close"></i>
   <h3 class="site-nav-item-sources-heading"><i class="fa fa-book"></i></h3>
   <div class="site-nav-item-sources">
     <h3 class="site-nav-item-sources-text">Sources used for this app:</h3>
@@ -36,6 +40,7 @@
   </div>
 </li>
 <li class="site-nav-item">
+  <i class="fa fa-close mobile-close"></i>
   <h3 class="site-nav-item-filter-heading"><i class="fa fa-filter"></i></h3>
   <form class="site-nav-item-filter">
       <label class="filter-price-label">Price:</label>
@@ -51,24 +56,29 @@
     </form>
 </li>
 <li class="site-nav-item">
+  <i class="fa fa-close mobile-close"></i>
   <h3 class="site-nav-item-login-heading"><i class="fa fa-user"></i></h3>
-      <a href="#users" class="">Profile</a>
-      <div class="login">
+      {{#if this.isUser}}
+      <a href="#users" class="profile-link">Profile</a>
+      {{else}}
+      <form class="login">
         <h3 class="login-heading">Login:</h3>
         <input type="email" class="login-email" required placeholder="Email">
         <input type="password" class="login-password" required placeholder="Password">
         <button class="login-submit"><i class="fa fa-check"></i></button>
-      </div>
+      </form>
+      {{/if}}
 </li>
 <li class="site-nav-item">
+  <i class="fa fa-close mobile-close"></i>
   <h3 class="site-nav-item-register-heading"><i class="fa fa-user-plus"></i></h3>
-  <div class="register">
+  <form class="register">
     <h3 class="register-heading">Register:</h3>
     <input type="text" class="register-name" required placeholder="Name">
     <input type="email" class="register-email" required placeholder="Email">
     <input type="password" class="register-password" required placeholder="Password">
     <button class="register-submit"><i class="fa fa-plus-circle"></i></button>
-  </div>
+  </form>
 </li>
 
 </ul>

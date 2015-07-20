@@ -13,21 +13,35 @@ export default Backbone.View.extend({
 		'submit .site-nav-item-search-form': 'submitSearch',
 		'submit .site-nav-item-filter': 'submitFilter',
 		'click .login-submit': 'logIn',
-		'click .register-submit': 'createUser'
+		'click .register-submit': 'createUser',
+		'mouseenter .site-nav-item:last-child': 'stayPut',
+		'click .site-nav-item .fa-close': 'closeBanner',
+		'mouseenter .site-nav-item:nth-child(2)': 'noOpen',
+		'mouseenter .site-nav-item:nth-child(5)': 'loginFunc',
+		'mouseleave .site-nav-item:nth-child(5)': 'loginFunc2'
 	},
-
 
 	initialize: function(options) {
 
+		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
+
 		this.originalCollection = this.collection.clone();
-		
+
 		this.search = options.search;
 		this.render();
 	},
 
 	render: function() {
 
-		this.$el.html(this.template());
+		if (Parse.User.current()) {
+			this.user = Parse.User.current();
+			this.user.set('isUser', true);
+		} else {
+			this.user = new Backbone.Model();
+			this.user.set('isUser', false);
+		}
+
+		this.$el.html(this.template(this.user.toJSON()));
 
 		this.areaMap = new GMaps({
 		  el: '#app',
@@ -130,7 +144,7 @@ export default Backbone.View.extend({
 		this.collection.maxSq = $('.filter-sqft-max-input').val() || 1000000000;
 		this.filteredCollection = new HomeCollection(this.collection.filteredCollection(this.collection));
 		this.collection = this.filteredCollection.clone();
-		this.render();
+		this.renderChildren();
 	},
 
 	updateFilters: function() {
@@ -151,7 +165,6 @@ export default Backbone.View.extend({
 		console.log(updatedFilters);
 		Parse.User.current().set('filters', updatedFilters);
 		Parse.User.current().save();
-		console.log(Parse.User.current());
 	},
 
 	renderPopUp: function(model) {
@@ -168,7 +181,7 @@ export default Backbone.View.extend({
 			router.navigate('#users', true);
 		  },
 		  error: function(user, error) {
-		    alert(error.message);
+		    alert('Error: Invalid username or password.');
 		    console.log(error);
 		  }
 		});
@@ -196,6 +209,42 @@ export default Backbone.View.extend({
 				console.log(error.message);
 			}
 		});
-	}
+	},
+
+	stayPut: function() {
+		if(Parse.User.current()) {
+			$('.site-nav-item:last-child').css({'width': '2.5%'});
+			$('.register').hide();
+		}
+	},
+
+	closeBanner: function(e) {
+		console.log($(e.target).parent());
+    	$(e.target).hide();
+    	$('.site-nav-item > div').fadeOut(100);
+    	$(e.target).parent().css({'width': '2.5%'});	
+    },
+
+    noOpen: function() {
+    	if ($('.site-nav-item:nth-child(2)').width() < 100) {
+    		$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});
+    	}
+    },
+
+    loginFunc: function() {
+    	if (Parse.User.current()) {
+    		$('.profile-link').css({'opacity': '1'});
+    	} else {
+    		$('.login').css({'opacity': '1'});
+    	}
+    },
+
+    loginFunc2: function() {
+    	if (Parse.User.current()) {
+    		$('.profile-link').css({'opacity': '0'});
+    	} else {
+    		$('.login').css({'opacity': '0'});
+    	}
+    }
 
 })

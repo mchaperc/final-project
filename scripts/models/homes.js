@@ -11,7 +11,11 @@ var HomeCollection = Backbone.Collection.extend({
 				&& home.attributes.property.area >= this.minSq
 				&& home.attributes.property.area <= this.maxSq;
 		}.bind(this));
-	}
+	},
+
+	// toJSON: function() {
+	// 	return _.extend({}, this.attributes, {this.isUser});
+	// }
 
 });
 
