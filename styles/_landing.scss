@@ -38,6 +38,11 @@
 	z-index: 90;
 }
 
+.mobile-close {
+	opacity: 0;
+	transform: opacity .5s linear;
+}
+
 .site-nav-item:first-child {
 	background-color: $pink;
 }
@@ -148,7 +153,6 @@
 	@include span-columns(4);
 	@include shift(.5);
 	display: inline-block;
-	font-size: 1.9vw;
 	position: relative;
 	text-align: center;
 	top: 50%;
@@ -162,14 +166,14 @@
 
 .site-nav-item-branding-text {
 	color: white;
-	font-size: 1.8em;
+	font-size: 3vw;
 	font-weight: 100;
 }
 
 .site-nav-item-description {
 	@include span-columns(6);
 	border-left: 1px solid white;
-	font-size: 3.5vw;
+	font-size: 3vw;
 	line-height: .7em;
 	padding-left: 2%;
 	position: relative;
@@ -238,7 +242,7 @@
 	top: 50%;
 	transition: opacity .1s linear;
 	transform: translateY(-50%);
-	width: 80%;
+	width: 100%;
 }
 
 .site-nav-item-filter-heading {
@@ -516,4 +520,70 @@
 	text-align: center;
 	transition: all .1s linear;
 	z-index: 100;
+}
+
+@include media(max-width $mobile) {
+	.site-nav-item {
+		width: 5%;
+	}
+	.site-nav-item:active .mobile-close,
+	.site-nav-item:hover .mobile-close {
+		opacity: 1;
+	}
+	.site-nav-item .heading {
+		font-size: 3vw;
+		// opacity: 1;
+		transition: opacity .1s linear;
+	}
+	.site-nav-item:hover .heading {
+		opacity: 0;
+	}
+	.site-nav-item-search {
+		margin: auto;
+		width: 90%;
+	}
+	.site-nav-item-search-heading, {
+		font-size: .8vw;
+	}
+	.site-nav-item-search input {
+		width: 50%;
+	}
+	.site-nav-item-search button {
+		width: 30%;
+	}
+	.site-nav-item-branding-text {
+		font-size: 4.5vw;
+	}
+	.site-nav-item-description {
+		font-size: 5vw;
+	}
+	.site-nav-item:active .mobile-close {
+		opacity: 1;
+	}
+	.site-nav-item-filter .filter-price-min-input,
+	.site-nav-item-filter .filter-price-max-input {
+		margin-top: 2.5%;
+		width: 30%;
+	}
+	.filter-bedrooms-label,
+	.filter-bedrooms-input,
+	.filter-bathrooms-label,
+	.filter-bathrooms-input,
+	.filter-sqft-label,
+	.filter-sqft-min-input,
+	.filter-sqft-max-input {
+		display: none;
+	}
+	.filter-cancel,
+	.filter-submit {
+		width: 40%;
+	}
+	.login,
+	.register {
+		width: 90%;
+	}
+	.popup {
+		left: 10%;
+		width: 80%;
+	}
 }

@@ -30,6 +30,8 @@ $light-blue: rgb(102, 204, 255);
 $base-font-color: $dark-gray;
 $base-background-color: $very-light-gray;
 
+$mobile: 980px;
+
 @import 'landing';
 @import 'listing';
 @import 'users';
