@@ -226,3 +226,38 @@ a .user-saved-homes-item:hover {
 	color: white;
 	cursor: pointer;
 }
+
+@include media(max-width $mobile) {
+	.user-header {
+		@include span-columns(11);
+		@include shift(.5);
+	}
+	.user-header-branding {
+		display: none;
+	}
+	.user-header-greeting {
+		padding-left: .5em;
+		text-align: left;
+		width: 65%;
+	}
+	.user-header-nav {
+		@include shift(0);
+		width: 35%;
+	}
+	.user-saved-homes {
+		@include span-columns(11);
+		@include shift(.5);
+		margin-bottom: 2em;
+	}
+	.user-saved-homes-item-text {
+		font-size: 2.4vw;
+	}
+	.user-saved-filters {
+		@include span-columns(11);
+		@include shift(.5);
+	}
+	.screen {
+		overflow: scroll;
+		padding-bottom: 1em;
+	}
+}

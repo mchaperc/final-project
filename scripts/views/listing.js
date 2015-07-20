@@ -61,13 +61,11 @@ export default Backbone.View.extend({
 			var demographicsColl = new DemographicsCollection(data);
 			var dataView = new DataView({collection: demographicsColl, model: this.model});
 			$('.listing-data-containers').prepend(dataView.el);
-			console.log(data);
 		}.bind(this));
 		var schools = new SchoolCollection({zipcode: zipcode});
 		schools.fetch().then(function(data) {
 			var schoolsView = new SchoolsView({collection: schools});
 			$('.listing-data-containers').append(schoolsView.el);
-			// console.log(schools);
 		}.bind(this));
 	},
 

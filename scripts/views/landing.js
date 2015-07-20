@@ -15,7 +15,7 @@ export default Backbone.View.extend({
 		'click .login-submit': 'logIn',
 		'click .register-submit': 'createUser',
 		'mouseenter .site-nav-item:last-child': 'stayPut',
-		'click .site-nav-item .fa-close': 'closeBanner',
+		'click .fa-close': 'closeBanner',
 		'mouseenter .site-nav-item:nth-child(2)': 'noOpen',
 		'mouseenter .site-nav-item:nth-child(5)': 'loginFunc',
 		'mouseleave .site-nav-item:nth-child(5)': 'loginFunc2'
@@ -213,21 +213,35 @@ export default Backbone.View.extend({
 
 	stayPut: function() {
 		if(Parse.User.current()) {
-			$('.site-nav-item:last-child').css({'width': '2.5%'});
-			$('.register').hide();
+			if(window.innerWidth < 980) {
+				$('.site-nav-item:last-child').css({'width': '5%'});
+				$('.register').hide();
+			} else {
+				$('.site-nav-item:last-child').css({'width': '2.5%'});
+				$('.register').hide();
+			}
 		}
 	},
 
 	closeBanner: function(e) {
-		console.log($(e.target).parent());
     	$(e.target).hide();
-    	$('.site-nav-item > div').fadeOut(100);
-    	$(e.target).parent().css({'width': '2.5%'});	
+    	$(e.target).parent().find('div').fadeOut(100);
+    	if(window.innerWidth < 980) {
+    		$(e.target).parent().css({'width': '5%'});	
+    	} else {
+    		$(e.target).parent().css({'width': '2.5%'});
+    	}
     },
 
     noOpen: function() {
-    	if ($('.site-nav-item:nth-child(2)').width() < 100) {
-    		$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});
+    	if (window.innerWidth < 980) {
+    		if ($('.site-nav-item:nth-child(2)').width() < 100) {
+	    		$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});
+	    	}
+    	} else {
+    		if ($('.site-nav-item:nth-child(2)').width() < 100) {
+	    		$('.site-nav-item:nth-child(2)').css({'width': '2.5%'});
+	    	}
     	}
     },
 

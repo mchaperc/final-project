@@ -13,9 +13,9 @@ var HomeCollection = Backbone.Collection.extend({
 		}.bind(this));
 	},
 
-	// toJSON: function() {
-	// 	return _.extend({}, this.attributes, {this.isUser});
-	// }
+	toJSON: function() {
+		return _.extend({}, this.attributes, this.isUser);
+	}
 
 });
 
