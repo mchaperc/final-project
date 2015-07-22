@@ -257,3 +257,24 @@
 		@include shift(0);
 	}
 }
+
+.elementary-data-basic-ratings,
+.middle-data-basic-ratings,
+.high-data-basic-ratings, {
+	margin-bottom: 1em;
+	margin-left: 3em;
+}
+
+.rating {
+	background-color: $red;
+	border-radius: 50px;
+	box-shadow: 0 0 3px rgba(0,0,0,.3);
+	color: white;
+	display: inline-block;
+	font-size: 1.2em;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	width: 50px;
+}
