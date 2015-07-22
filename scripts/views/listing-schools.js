@@ -37,6 +37,28 @@ export default Backbone.View.extend({
 	loadElementaryProfile: function() {
 		var elementaryView = new ElementaryView({collection: this.collection});
 		$('.elementary-data').prepend(elementaryView.el);
+		if (this.collection.models[0].attributes.elementary.gsRating >= 9) {
+			$('.elementary-data-basic-ratings .gs').addClass('excellent');
+		} else if (this.collection.models[0].attributes.elementary.gsRating >= 7) {
+			$('.elementary-data-basic-ratings .gs').addClass('good');
+		} else if (this.collection.models[0].attributes.elementary.gsRating >= 5) {
+			$('.elementary-data-basic-ratings .gs').addClass('average');
+		} else if (this.collection.models[0].attributes.elementary.gsRating >= 3) {
+			$('.elementary-data-basic-ratings .gs').addClass('poor');
+		} else {
+			$('.elementary-data-basic-ratings .gs').addClass('awful');
+		}
+		if (this.collection.models[0].attributes.elementary.parentRating >= 9) {
+			$('.elementary-data-basic-ratings .parent').addClass('excellent');
+		} else if (this.collection.models[0].attributes.elementary.parentRating >= 7) {
+			$('.elementary-data-basic-ratings .parent').addClass('good');
+		} else if (this.collection.models[0].attributes.elementary.parentRating >= 5) {
+			$('.elementary-data-basic-ratings .parent').addClass('average');
+		} else if (this.collection.models[0].attributes.elementary.parentRating >= 3) {
+			$('.elementary-data-basic-ratings .parent').addClass('poor');
+		} else {
+			$('.elementary-data-basic-ratings .parent').addClass('awful');
+		}
 	},
 
 	// loadElementaryScores: function() {
@@ -208,6 +230,28 @@ export default Backbone.View.extend({
 	loadMiddleProfile: function() {
 		var middleView = new MiddleView({collection: this.collection});
 		$('.middle-data').prepend(middleView.el);
+		if (this.collection.models[0].attributes.middle.gsRating >= 9) {
+			$('.middle-data-basic-ratings .gs').addClass('excellent');
+		} else if (this.collection.models[0].attributes.middle.gsRating >= 7) {
+			$('.middle-data-basic-ratings .gs').addClass('good');
+		} else if (this.collection.models[0].attributes.middle.gsRating >= 5) {
+			$('.middle-data-basic-ratings .gs').addClass('average');
+		} else if (this.collection.models[0].attributes.middle.gsRating >= 3) {
+			$('.middle-data-basic-ratings .gs').addClass('poor');
+		} else {
+			$('.middle-data-basic-ratings .gs').addClass('awful');
+		}
+		if (this.collection.models[0].attributes.middle.parentRating >= 9) {
+			$('.middle-data-basic-ratings .parent').addClass('excellent');
+		} else if (this.collection.models[0].attributes.middle.parentRating >= 7) {
+			$('.middle-data-basic-ratings .parent').addClass('good');
+		} else if (this.collection.models[0].attributes.middle.parentRating >= 5) {
+			$('.middle-data-basic-ratings .parent').addClass('average');
+		} else if (this.collection.models[0].attributes.middle.parentRating >= 3) {
+			$('.middle-data-basic-ratings .parent').addClass('poor');
+		} else {
+			$('.middle-data-basic-ratings .parent').addClass('awful');
+		}
 	},
 
 	// loadMiddleScores: function() {
@@ -376,6 +420,28 @@ export default Backbone.View.extend({
 	loadHighProfile: function() {
 		var highView = new HighView({collection: this.collection});
 		$('.high-data').prepend(highView.el);
+		if (this.collection.models[0].attributes.high.gsRating >= 9) {
+			$('.high-data-basic-ratings .gs').addClass('excellent');
+		} else if (this.collection.models[0].attributes.high.gsRating >= 7) {
+			$('.high-data-basic-ratings .gs').addClass('good');
+		} else if (this.collection.models[0].attributes.high.gsRating >= 5) {
+			$('.high-data-basic-ratings .gs').addClass('average');
+		} else if (this.collection.models[0].attributes.high.gsRating >= 3) {
+			$('.high-data-basic-ratings .gs').addClass('poor');
+		} else {
+			$('.high-data-basic-ratings .gs').addClass('awful');
+		}
+		if (this.collection.models[0].attributes.high.parentRating >= 9) {
+			$('.high-data-basic-ratings .parent').addClass('excellent');
+		} else if (this.collection.models[0].attributes.high.parentRating >= 7) {
+			$('.high-data-basic-ratings .parent').addClass('good');
+		} else if (this.collection.models[0].attributes.high.parentRating >= 5) {
+			$('.high-data-basic-ratings .parent').addClass('average');
+		} else if (this.collection.models[0].attributes.high.parentRating >= 3) {
+			$('.high-data-basic-ratings .parent').addClass('poor');
+		} else {
+			$('.high-data-basic-ratings .parent').addClass('awful');
+		}
 	},
 
 	// loadHighScores: function() {

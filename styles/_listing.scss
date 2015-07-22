@@ -266,7 +266,7 @@
 }
 
 .rating {
-	background-color: $red;
+	// background-color: $red;
 	border-radius: 50px;
 	box-shadow: 0 0 3px rgba(0,0,0,.3);
 	color: white;
@@ -277,4 +277,24 @@
 	text-align: center;
 	vertical-align: middle;
 	width: 50px;
+}
+
+.excellent {
+	background-color: $blue;
+}
+
+.good {
+	background-color: $green;
+}
+
+.average {
+	background-color: $yellow;
+}
+
+.poor {
+	background-color: $orange;
+}
+
+.awful {
+	background-color: $red;
 }

@@ -44,12 +44,14 @@ export default Backbone.View.extend({
 
 		// A report to the console of what technologies are being utilized within this project.
 
-		console.log('Thanks for checking out my project! Here\'s a list of the technologies used for this project: ', {JavaScript: ['JavaScript', 'jQuery', 'Underscore', 'Backbone', 'Handlebars', 'Node', 'Express', 'ECMAScript 6', 'Babel', 'Require', 'Parse', 'Modernizr', 'Gulp', 'GMaps', 'HighCharts'], 
+		console.log('Thanks for checking out my project! Here\'s a list of the technologies used for this project: ', 
+				{
+					JavaScript: ['JavaScript', 'jQuery', 'Underscore', 'Backbone', 'Handlebars', 'Node', 'Express', 'ES6', 'Babel', 'Require', 'Parse', 'Modernizr', 'Gulp', 'GMaps', 'HighCharts'], 
 					HTML: 'HTML5', 
 					CSS: ['SCSS', 'Bourbon', 'Neat'],
-					RestfulAPIs: ['Parse.com', 'Education.com', 'GeoDataService.net', 'SimplyRETS.com'],
+					RestfulAPIs: ['Parse.com', 'Education.com', 'GeoDataService.net', 'SimplyRETS.com', 'GreatSchools.org'],
 					otherResources: ['GeoLocation Services', 'Google Maps', ]
-					});
+				});
 	},
 
 	render: function() {
