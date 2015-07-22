@@ -194,7 +194,7 @@ Object.defineProperty(exports, '__esModule', {
 exports['default'] = Backbone.View.extend({
 
 	initialize: function initialize(options) {
-		this.demographics = this.collection.models[0].attributes.data.d[0];
+		this.demographics = this.collection.models[0].attributes;
 		this.loadAge();
 		this.loadIncome();
 		this.loadCrime();
@@ -205,25 +205,24 @@ exports['default'] = Backbone.View.extend({
 	},
 
 	loadAge: function loadAge() {
-		console.log('in loadData');
-		var underFive = this.demographics.PopulationUnder5;
-		var fiveToNine = this.demographics.Population5to9;
-		var tenToFourteen = this.demographics.Population10to14;
-		var fifteenToNineteen = this.demographics.Population15to19;
-		var twentyToTwentyFour = this.demographics.Population20to24;
-		var twentyFiveToTwentyNine = this.demographics.Population25to29;
-		var thirtyToThirtyFour = this.demographics.Population30to34;
-		var thirtyFiveToThirtyNine = this.demographics.Population35to39;
-		var fortyToFortyFour = this.demographics.Population40to44;
-		var fortyFiveToFortyNine = this.demographics.Population45to49;
-		var fiftyToFiftyFour = this.demographics.Population50to54;
-		var fiftyFiveToFiftyNine = this.demographics.Population55to59;
-		var sixtyToSixtyFour = this.demographics.Population60to64;
-		var sixtyFiveToSixtyNine = this.demographics.Population65to69;
-		var seventyToSeventyFour = this.demographics.Population70to74;
-		var seventyFiveToSeventyNine = this.demographics.Population75to79;
-		var eightyToEightyFour = this.demographics.Population80to84;
-		var eightyFivePlus = this.demographics.Population85Plus;
+		var underFive = Number(this.demographics.PopulationUnder5);
+		var fiveToNine = Number(this.demographics.Population5to9);
+		var tenToFourteen = Number(this.demographics.Population10to14);
+		var fifteenToNineteen = Number(this.demographics.Population15to19);
+		var twentyToTwentyFour = Number(this.demographics.Population20to24);
+		var twentyFiveToTwentyNine = Number(this.demographics.Population25to29);
+		var thirtyToThirtyFour = Number(this.demographics.Population30to34);
+		var thirtyFiveToThirtyNine = Number(this.demographics.Population35to39);
+		var fortyToFortyFour = Number(this.demographics.Population40to44);
+		var fortyFiveToFortyNine = Number(this.demographics.Population45to49);
+		var fiftyToFiftyFour = Number(this.demographics.Population50to54);
+		var fiftyFiveToFiftyNine = Number(this.demographics.Population55to59);
+		var sixtyToSixtyFour = Number(this.demographics.Population60to64);
+		var sixtyFiveToSixtyNine = Number(this.demographics.Population65to69);
+		var seventyToSeventyFour = Number(this.demographics.Population70to74);
+		var seventyFiveToSeventyNine = Number(this.demographics.Population75to79);
+		var eightyToEightyFour = Number(this.demographics.Population80to84);
+		var eightyFivePlus = Number(this.demographics.Population85Plus);
 		$('#age').highcharts({
 			chart: {
 				type: 'pie',
@@ -311,16 +310,16 @@ exports['default'] = Backbone.View.extend({
 	},
 
 	loadCrime: function loadCrime() {
-		var violentCrime = this.demographics.ViolentCrime;
-		var murderAndManslaughter = this.demographics.MurderAndManslaughter;
-		var forcibleRape = this.demographics.ForcibleRape;
-		var robbery = this.demographics.Robbery;
-		var aggravatedAssault = this.demographics.AggravatedAssault;
-		var propertyCrime = this.demographics.PropertyCrime;
-		var burglary = this.demographics.Burglary;
-		var larcenyTheft = this.demographics.LarcenyTheft;
-		var motorVehicleTheft = this.demographics.MotorVehicleTheft;
-		var arson = this.demographics.Arson;
+		var violentCrime = Number(this.demographics.ViolentCrime);
+		var murderAndManslaughter = Number(this.demographics.MurderAndManslaughter);
+		var forcibleRape = Number(this.demographics.ForcibleRape);
+		var robbery = Number(this.demographics.Robbery);
+		var aggravatedAssault = Number(this.demographics.AggravatedAssault);
+		var propertyCrime = Number(this.demographics.PropertyCrime);
+		var burglary = Number(this.demographics.Burglary);
+		var larcenyTheft = Number(this.demographics.LarcenyTheft);
+		var motorVehicleTheft = Number(this.demographics.MotorVehicleTheft);
+		var arson = Number(this.demographics.Arson);
 		$('#crime').highcharts({
 			title: {
 				text: 'Reported Crimes',
@@ -1522,13 +1521,12 @@ exports['default'] = Backbone.View.extend({
 
 	renderData: function renderData() {
 		var zipcode = this.model.attributes.address.postalCode;
-		// var demographics = new DemographicsCollection({zipcode: zipcode});
-		// demographics.fetch().then(function(data) {
-		// 	console.log('in demo fetch');
-		// 	var demographicsColl = new DemographicsCollection(data);
-		// 	var dataView = new DataView({collection: demographicsColl, model: this.model});
-		// 	$('.listing-data-containers').prepend(dataView.el);
-		// }.bind(this));
+		var demographics = new _modelsDemographicsCollection.DemographicsCollection({ zipcode: zipcode });
+		demographics.fetch().then((function (data) {
+			var demographicsColl = new _modelsDemographicsCollection.DemographicsCollection(data);
+			var dataView = new _data2['default']({ collection: demographicsColl, model: this.model });
+			$('.listing-data-containers').prepend(dataView.el);
+		}).bind(this));
 		var schools = new _modelsSchools.SchoolCollection({ zipcode: zipcode });
 		schools.fetch().then((function (data) {
 			var schoolsView = new _listingSchools2['default']({ collection: schools });
