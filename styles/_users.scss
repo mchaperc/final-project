@@ -95,8 +95,6 @@
 	@include shift(1);
 	margin-top: 2em;
 	max-height: 70%;
-	overflow-x: auto;
-	overflow-y: scroll;
 }
 
 .user-saved-homes-heading {
@@ -108,6 +106,11 @@
 	font-weight: 100;
 	padding: 1em;
 	text-align: center;
+}
+
+.user-saved-homes-list {
+	max-height: 383px;
+	overflow-y: scroll;
 }
 
 .user-saved-homes-item {
@@ -125,7 +128,6 @@ a .user-saved-homes-item {
 a .user-saved-homes-item:hover {
 	background-color: rgba(73, 174, 69,1);
 	color: white;
-	// transform: scale(1.1);
 	z-index: 2;
 }
 
@@ -133,6 +135,12 @@ a .user-saved-homes-item:hover {
 	display: inline-block;
 	height: 100%;
 	width: 150px;
+}
+
+.user-saved-homes-item .fa-close {
+	float: right;
+	margin-right: 3%;
+	margin-top: -30px;
 }
 
 .user-saved-homes-item-text {
@@ -155,6 +163,8 @@ a .user-saved-homes-item:hover {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	height: 10px;
+	margin-top: -3px;
+	position: relative;
 	width: 100%;
 }
 
@@ -195,5 +205,59 @@ a .user-saved-homes-item:hover {
 	padding: .2em;
 	margin-bottom: .5em;
 	margin-left: 1%;
-	width: 40%;
+	text-align: right;
+	width: 35%;
+}
+
+.user-saved-filters-update {
+	background-color: white;
+	border: 2px solid $green;
+	border-radius: 5px;
+	color: black;
+	font-size: 1em;
+	height: 40px;
+	margin-top: 1em;
+	transition: all .2s ease;
+	width: 60%;
+}
+
+.user-saved-filters-update:hover {
+	background-color: $green;
+	color: white;
+	cursor: pointer;
+}
+
+@include media(max-width $mobile) {
+	.user-header {
+		@include span-columns(11);
+		@include shift(.5);
+	}
+	.user-header-branding {
+		display: none;
+	}
+	.user-header-greeting {
+		padding-left: .5em;
+		text-align: left;
+		width: 65%;
+	}
+	.user-header-nav {
+		@include shift(0);
+		width: 35%;
+	}
+	.user-saved-homes {
+		@include span-columns(11);
+		@include shift(.5);
+		margin-bottom: 2em;
+	}
+	.user-saved-homes-item-text {
+		font-size: 2.4vw;
+	}
+	.user-saved-filters {
+		@include span-columns(11);
+		@include shift(.5);
+	}
+	.screen {
+		overflow: scroll;
+		padding-bottom: 1em;
+	}
 }

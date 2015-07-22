@@ -1,5 +1,9 @@
+<div id="map"></div>
+
+<ul class="site-nav">
+
 <li class="site-nav-item">
-  <h3 class="site-nav-item-search-heading"><i class="fa fa-search"></i></h3>
+  <h3 class="site-nav-item-search-heading heading"><i class="fa fa-search"></i></h3>
   <div class="site-nav-item-search">
     <h3 class="site-nav-item-search-text">Search for homes near:</h3>
     <form class="site-nav-item-search-form">
@@ -21,48 +25,56 @@
   </div>
 </li>
 <li class="site-nav-item">
-  <h3 class="site-nav-item-sources-heading"><i class="fa fa-book"></i></h3>
+  <h3 class="site-nav-item-sources-heading heading"><i class="fa fa-book"></i></h3>
   <div class="site-nav-item-sources">
     <h3 class="site-nav-item-sources-text">Sources used for this app:</h3>
     <ul class="site-nav-item-sources-list">
-      <li class="site-nav-item-sources-item"><a href="http://zillow.com"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40.gif" width="150" height="40" alt="Zillow Real Estate Search" /></a></li>
+      <li class="site-nav-item-sources-item"><a href="http://simplyrets.com"><img src="https://simplyrets.com/images/logo.png" width="40" height="40"></a></li>
       <li class="site-nav-item-sources-item"><a href="http://google.com/maps"><img src="../../img/Google-Map-Logo.jpg" width="80" height="40"></a></li>
-      <li class="site-nav-item-sources-item"><a href="http://greatschools.org"><img src="../../img/greatschools.png" width="150" height="40"></a></li>
-      <li class="site-nav-item-sources-item"><a href="http://active.com"><img src="../../img/active.gif" width="150" height="40"></a></li>
+      <li class="site-nav-item-sources-item"><a href="http://geodataservice.net"><img src="../../img/geodata.png" width="40" height="40"></a></li>
+      <li class="site-nav-item-sources-item"><a rel="nofollow" href="http://education.com"><img src="../../img/education.jpg" width="100" height="40"></a></li>
     </ul>
   </div>
 </li>
 <li class="site-nav-item">
-  <h3 class="site-nav-item-filter-heading"><i class="fa fa-filter"></i></h3>
+  <h3 class="site-nav-item-filter-heading heading"><i class="fa fa-filter"></i></h3>
   <form class="site-nav-item-filter">
       <label class="filter-price-label">Price:</label>
-      <input type="number" class="filter-price-min-input" placeholder="min" min="0"> to <input type="number" class="filter-price-max-input" placeholder="max" min="0">
+      <input type="number" class="filter-price-min-input" placeholder="min" min="0"> to 
+      <input type="number" class="filter-price-max-input" placeholder="max" min="0">
       <label class="filter-bedrooms-label">Bedrooms:</label>
       <input type="number" class="filter-bedrooms-input" placeholder="0+" min="0">
       <label for="" class="filter-bathrooms-label">Bathrooms:</label>
       <input type="number" class="filter-bathrooms-input" placeholder="0+" min="0">
       <label for="" class="filter-sqft-label">House Square Feet:</label>
-      <input type="number" class="filter-sqft-min-input" placeholder="min" min="0"> to <input type="number" class="filter-sqft-max-input" placeholder="max" min="0"><br>
+      <input type="number" class="filter-sqft-min-input" placeholder="min" min="0"> to 
+      <input type="number" class="filter-sqft-max-input" placeholder="max" min="0"><br>
       <button class="filter-cancel"><i class="fa fa-ban"></i> Cancel</button>
       <button class="filter-submit"><i class="fa fa-filter"></i> Filter</button>
     </form>
 </li>
 <li class="site-nav-item">
-  <h3 class="site-nav-item-login-heading"><i class="fa fa-user"></i></h3>
-    <div class="login">
-      <h3 class="login-heading">Login:</h3>
-      <input type="email" class="login-email" required placeholder="Email">
-      <input type="password" class="login-password" required placeholder="Password">
-      <button class="login-submit"><i class="fa fa-check"></i></button>
-    </div>
+  <h3 class="site-nav-item-login-heading heading"><i class="fa fa-user"></i></h3>
+      {{#if this.isUser}}
+      <a href="#users" class="profile-link">Profile</a>
+      {{else}}
+      <form class="login">
+        <h3 class="login-heading">Login:</h3>
+        <input type="email" class="login-email" required placeholder="Email">
+        <input type="password" class="login-password" required placeholder="Password">
+        <button class="login-submit"><i class="fa fa-check"></i></button>
+      </form>
+      {{/if}}
 </li>
 <li class="site-nav-item">
-  <h3 class="site-nav-item-register-heading"><i class="fa fa-user-plus"></i></h3>
-  <div class="register">
+  <h3 class="site-nav-item-register-heading heading"><i class="fa fa-user-plus"></i></h3>
+  <form class="register">
     <h3 class="register-heading">Register:</h3>
-    <input type="ea" class="register-name" required placeholder="Name">
+    <input type="text" class="register-name" required placeholder="Name">
     <input type="email" class="register-email" required placeholder="Email">
     <input type="password" class="register-password" required placeholder="Password">
     <button class="register-submit"><i class="fa fa-plus-circle"></i></button>
-  </div>
+  </form>
 </li>
+
+</ul>

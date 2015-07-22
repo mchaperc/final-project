@@ -1,6 +1,7 @@
 import LandingView from './views/landing';
 import ListingView from './views/listing';
 import UserView from './views/user';
+import LoadingView from './views/loading';
 import {HomeCollection} from './models/homes';
 import {SearchLocation} from './models/location';
 import {User, UserCollection} from './models/users';
@@ -16,45 +17,44 @@ var Router = Backbone.Router.extend({
 	},
 
 	initialize: function() {
-		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'emZaIAgysn8nKGxKO8lYRchGqGko99VlAwbOSHRe');
+		Parse.initialize('VdIzGCJLC4lY90r79Yvj6n9rn0pChj7OemI2Ibdw', 'KGq62htoH5zj0Hv6WZsWG0IQoaA04ufqKD0f73JZ');
 		this.homes = new HomeCollection();
 		this.homes.fetch();
 	},
 
 	index: function() {
-		$('#app').html('');
 		$('#app').removeClass('listing');
 		$('#app').removeClass('users');
 		$('#app').addClass('landing');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		this.myLocation = new Promise(function(resolve, reject) { 
   			navigator.geolocation.getCurrentPosition(resolve, reject);
-		}).then(function(position) {
-			return position;
 		});
 		Promise.resolve(this.myLocation).then(function(value) {
 			this.homes.fetch().then(function(data) {
-				var searchLocation = new SearchLocation();
-				this.homesColl = new HomeCollection(data);
+				var searchLocation = new SearchLocation(value);
 				if (Parse.User.current()) {
 					var user = new User();
-					this.LandingView = new LandingView({collection: this.homesColl, 
-													myLocation: value, 
-													search: searchLocation,
-													user: user});
+					this.landingView = new LandingView({collection: this.homes,
+														search: searchLocation,
+														user: user}, {isUser: true});
 				} else {
 					var users = new UserCollection();
-					this.LandingView = new LandingView({collection: this.homesColl, 
-													myLocation: value, 
-													search: searchLocation,
-													users: users});
+					this.landingView = new LandingView({collection: this.homes, 
+														search: searchLocation,
+														users: users},
+														{isUser: false});
 				}
-				$('#app').html(this.LandingView.el);
+				$('.sk-circle').remove();
+				$('#app').append(this.landingView.el);
 			}.bind(this))
 		}.bind(this));
 	},
 
 	users: function() {
-		$('#app').html('');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		$('#app').removeClass('listing');
 		$('#app').addClass('users');
 		if (Parse.User.current()) {
@@ -63,17 +63,18 @@ var Router = Backbone.Router.extend({
 				var user = Parse.User.current();
 				var userView = new UserView({model: user, collection: homesColl});
 				$('#app').html(userView.el);
+				$('#app').removeClass('landing');
+				$('#app').removeClass('users');
+				$('#app').addClass('listing');
 			})
 		} else {
-			router.navigate('');
+			router.navigate('', true);
 		}
 	},
 
 	listing: function(id) {
-		$('#app').html('');
-		$('#app').removeClass('landing');
-		$('#app').removeClass('users');
-		$('#app').addClass('listing');
+		var loadingView = new LoadingView();
+		$('#app').html(loadingView.el);
 		var homes = new HomeCollection();
 		homes.fetch().then(function(data) {
 			var homesColl = new HomeCollection(data);
@@ -85,6 +86,9 @@ var Router = Backbone.Router.extend({
 			}
 			this.listingView = new ListingView({model: home, collection: homesColl, user: user});
 			$('#app').html(this.listingView.el);
+			$('#app').removeClass('landing');
+			$('#app').removeClass('users');
+			$('#app').addClass('listing');
 		}.bind(this));
 	}
 

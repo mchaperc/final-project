@@ -32,13 +32,14 @@
 	<h3 class="user-saved-filters-heading">Filters:</h3>
 	<div class="user-saved-filters-filters">
 		<label class="user-saved-filters-price">Min and Max Price:</label>
-		<input class="user-saved-filters-price-min" type="number"> to <input class="user-saved-filters-price-max" type="number">
+		$<input class="user-saved-filters-price-min" type="number" placeholder="{{this.filters.minPrice}}"> to $<input class="user-saved-filters-price-max" type="number" placeholder="{{this.filters.maxPrice}}">
 		<label class="user-saved-filters-bedrooms">Bedrooms:</label>
-		<input type="number" class="user-saved-filters-bedrooms">
+		<input type="number" class="user-saved-filters-bedrooms-beds" placeholder="{{this.filters.bedrooms}}">
 		<label class="user-saved-filters-bathrooms">Bathrooms:</label>
-		<input type="number" class="user-saved-filters-bathrooms">
+		<input type="number" class="user-saved-filters-bathrooms-baths" placeholder="{{this.filters.baths}}">
 		<label class="user-saved-filters-sqft">Square Feet:</label>
-		<input class="user-saved-filters-sqft-min" type="number"> to <input class="user-saved-filters-sqft-max" type="number">
+		<input class="user-saved-filters-sqft-min" type="number" placeholder="{{this.filters.minSq}}"> to <input class="user-saved-filters-sqft-max" type="number" placeholder="{{this.filters.maxSq}}">
+		<button class="user-saved-filters-update">Update</button>
 	</div>
 	<div class="user-saved-filters-footer"></div>
 </section>

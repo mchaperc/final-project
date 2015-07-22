@@ -1,7 +1,21 @@
 .landing {
-	background-image: url('../../img/us.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+	height: 100%;
+	margin-top: 0;
+}
+
+.loading-container {
+	background-color: $blue;
+	height: 100%;
+	margin-top: 0;
+}
+
+.sk-circle {
+	margin: auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 100px;
+	width: 100px;
 }
 
 .site-nav {
@@ -17,11 +31,17 @@
 .site-nav-item {
 	display: block;
 	height: 16.66%;
+	overflow: scroll;
 	pointer-events: visible;
 	position: relative;
 	transition: all 1s ease;
 	width: 2.5%;
 	z-index: 90;
+}
+
+.mobile-close {
+	opacity: 0;
+	transform: opacity .5s linear;
 }
 
 .site-nav-item:first-child {
@@ -50,6 +70,11 @@
 }
 
 .site-nav-item:hover {
+	transition: all .3s ease;
+	width: 100%;
+}
+
+.site-nav-item:active {
 	transition: all .3s ease;
 	width: 100%;
 }
@@ -129,7 +154,6 @@
 	@include span-columns(4);
 	@include shift(.5);
 	display: inline-block;
-	font-size: 1.9vw;
 	position: relative;
 	text-align: center;
 	top: 50%;
@@ -143,14 +167,14 @@
 
 .site-nav-item-branding-text {
 	color: white;
-	font-size: 1.8em;
+	font-size: 3vw;
 	font-weight: 100;
 }
 
 .site-nav-item-description {
 	@include span-columns(6);
 	border-left: 1px solid white;
-	font-size: 3.5vw;
+	font-size: 3vw;
 	line-height: .7em;
 	padding-left: 2%;
 	position: relative;
@@ -192,7 +216,7 @@
 }
 
 .site-nav-item-sources-text {
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 }
 
 .site-nav-item:nth-child(3):hover .site-nav-item-sources {
@@ -219,7 +243,7 @@
 	top: 50%;
 	transition: opacity .1s linear;
 	transform: translateY(-50%);
-	width: 80%;
+	width: 100%;
 }
 
 .site-nav-item-filter-heading {
@@ -244,7 +268,7 @@
 	border: none;
 	border-radius: 3px;
 	font-size: 1em;
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 	padding-left: .3em;
 	width: 5%;
 }
@@ -273,6 +297,27 @@
 	cursor: pointer;
 }
 
+.profile-link {
+	background-color: rgba(50,50,50,.7);
+	border-radius: 5px;
+	color: white;
+	opacity: 0;
+	height: 30px;
+	position: absolute;
+	left: 40%;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: all .5s ease;
+	width: 20%;
+}
+
+.profile-link:hover {
+	background-color: rgba(20,20,20,.9);
+}
+
 .login {
 	font-size: 1.2em;
 	height: 90%;
@@ -283,7 +328,7 @@
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 30%;
+	width: 50%;
 }
 
 .site-nav-item-login-heading {
@@ -295,10 +340,6 @@
 	transform: translateY(-50%);
 }
 
-.site-nav-item:nth-child(5):hover .login {
-	opacity: 1;
-}
-
 .login-heading {
 	color: white;
 	font-weight: 200;
@@ -307,10 +348,11 @@
 
 .login input {
 	border: none;
-	display: block;
+	display: inline-block;
 	font-size: 1em;
 	margin: 1px auto;
-	width: 80%;
+	text-align: center;
+	width: 40%;
 }
 
 .login-submit {
@@ -319,7 +361,8 @@
 	color: $red;
 	font-size: 1em;
 	margin: auto;
-	width: 80%;
+	margin-top: .2em;
+	width: 40%;
 }
 
 .login-submit:hover {
@@ -401,10 +444,11 @@
 	background-color: rgba(250,250,250,.9);
 	border-radius: 5px;
 	position: fixed;
-	height: 70%;
+	height: 80%;
 	left: 35%;
+	padding-bottom: 1em;
 	pointer-events: visible;
-	top: 15%;
+	top: 10%;
 	width: 30%;
 	z-index: 100;
 }
@@ -474,4 +518,71 @@
 	text-align: center;
 	transition: all .1s linear;
 	z-index: 100;
+}
+
+@include media(max-width $mobile) {
+	.site-nav-item {
+		width: 5%;
+	}
+	.site-nav-item:active .mobile-close,
+	.site-nav-item:hover .mobile-close {
+		opacity: 1;
+	}
+	.site-nav-item .heading {
+		font-size: 3vw;
+		// opacity: 1;
+		transition: opacity .1s linear;
+	}
+	.site-nav-item:hover .heading {
+		opacity: 0;
+	}
+	.site-nav-item-search {
+		margin: auto;
+		width: 90%;
+	}
+	.site-nav-item-search-heading, {
+		font-size: .8vw;
+	}
+	.site-nav-item-search input {
+		width: 50%;
+	}
+	.site-nav-item-search button {
+		width: 30%;
+	}
+	.site-nav-item-branding-text {
+		font-size: 4.5vw;
+	}
+	.site-nav-item-description {
+		font-size: 5vw;
+	}
+	.site-nav-item:active .mobile-close {
+		opacity: 1;
+	}
+	.site-nav-item-filter .filter-price-min-input,
+	.site-nav-item-filter .filter-price-max-input {
+		margin-top: 2.5%;
+		width: 30%;
+	}
+	.filter-bedrooms-label,
+	.filter-bedrooms-input,
+	.filter-bathrooms-label,
+	.filter-bathrooms-input,
+	.filter-sqft-label,
+	.filter-sqft-min-input,
+	.filter-sqft-max-input {
+		display: none;
+	}
+	.filter-cancel,
+	.filter-submit {
+		width: 40%;
+	}
+	.login,
+	.register {
+		width: 90%;
+	}
+	.popup {
+		left: 10%;
+		width: 80%;
+		overflow: scroll;
+	}
 }
