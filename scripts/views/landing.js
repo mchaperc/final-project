@@ -182,7 +182,7 @@ export default Backbone.View.extend({
 		this.search.fetch().then(function(data) {
 			this.search.set('lat', data.results[0].geometry.location.lat);
 			this.search.set('lng', data.results[0].geometry.location.lng);
-			console.log(this.search);
+			// console.log(this.search);
 			this.rerender();
 		}.bind(this));
 	},
@@ -225,7 +225,7 @@ export default Backbone.View.extend({
 			minSq: minSq, 
 			maxSq: maxSq
 		}
-		console.log(updatedFilters);
+		// console.log(updatedFilters);
 		Parse.User.current().set('filters', updatedFilters);
 		Parse.User.current().save();
 	},
@@ -248,12 +248,12 @@ export default Backbone.View.extend({
 		var password = this.$('.login-password').val();
 		Parse.User.logIn(username, password, {
 		  success: function(user) {
-		    console.log(user);
+		    // console.log(user);
 			router.navigate('#users', true);
 		  },
 		  error: function(user, error) {
 		    alert('Error: Invalid username or password.');
-		    console.log(error);
+		    // console.log(error);
 		  }
 		});
 	},
@@ -274,14 +274,14 @@ export default Backbone.View.extend({
 		user.set('filters', {minPrice: 0, maxPrice: 1000000000, bedrooms: 0, baths: 0, minSq: 0, maxSq: 1000000});
 		user.signUp(null, {
 			success: function(user) {
-				console.log(user);
+				// console.log(user);
 				Parse.User.become(user.sessionToken).then(function(user) {
 				 router.navigate('#users', true);
 				});
 			},
 			error: function(user, error) {
 				alert('Error: registration unsuccessful due to: ' + error.message);
-				console.log(error.message);
+				// console.log(error.message);
 			}
 		});
 	},

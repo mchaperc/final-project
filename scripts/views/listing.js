@@ -111,7 +111,7 @@ export default Backbone.View.extend({
 			Parse.User.current().save();
 			this.model.set('isSaved', false);
 			this.render();
-			console.log(Parse.User.current());
+			// console.log(Parse.User.current());
 		} else {
 			var mlsId = this.model.get('mlsId');
 			var address = this.model.get('address');
@@ -129,7 +129,7 @@ export default Backbone.View.extend({
 			Parse.User.current().set('homes', savedHomes.concat([newHome]));
 			Parse.User.current().save();
 			this.render();
-			console.log(Parse.User.current());
+			// console.log(Parse.User.current());
 		}
 	},
 

@@ -13,7 +13,7 @@ export default Backbone.View.extend({
 	initialize: function() { 
 		this.render();
 		this.listenTo(this.model, 'update add remove', this.render);
-		console.log(this.model.get('homes'));
+		// console.log(this.model.get('homes'));
 	},
 
 	render: function() {
@@ -43,7 +43,7 @@ export default Backbone.View.extend({
 		console.log(updatedFilters);
 		Parse.User.current().set('filters', updatedFilters);
 		Parse.User.current().save();
-		console.log(Parse.User.current());
+		// console.log(Parse.User.current());
 	}
 
 });

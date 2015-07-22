@@ -166,7 +166,7 @@ this["JST"]["popup"] = Handlebars.template({"1":function(depth0,helpers,partials
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.photos : depth0)) != null ? stack1['0'] : stack1), depth0))
     + "\" alt=\"\" class=\"popup-image\">\n    <a href=\"#listing/"
     + alias2(alias1((depth0 != null ? depth0.mlsId : depth0), depth0))
-    + "\"><button class=\"popup-more\"><i class=\"fa fa-plus-circle\"></i></button></a>\n</div>";
+    + "\"><button class=\"popup-more\"><i class=\"fa fa-info-circle\"></i></button></a>\n</div>";
 },"useData":true});
 this["JST"]["user"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var alias1=this.lambda, alias2=this.escapeExpression;

@@ -170,142 +170,6 @@ module.exports = exports['default'];
   
 });
 
-require.register("models/censusCollection", function(exports, require, module){
-  "use strict";
-  
-});
-
-require.register("models/demographicsCollection", function(exports, require, module){
-  'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-var DemographicsCollection = Backbone.Collection.extend({
-
-	url: function url() {
-		return 'http://localhost:5000/demo/' + this.zipcode;
-	},
-
-	initialize: function initialize(options) {
-		this.zipcode = options.zipcode;
-	}
-
-});
-
-exports['default'] = { DemographicsCollection: DemographicsCollection };
-module.exports = exports['default'];
-  
-});
-
-require.register("models/homes", function(exports, require, module){
-  'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-var HomeCollection = Backbone.Collection.extend({
-
-	url: 'https://jsonp.afeld.me/?callback=?&url=https://simplyrets:simplyrets@api.simplyrets.com/properties',
-
-	filteredCollection: function filteredCollection(collection) {
-		return collection.filter((function (home) {
-			return home.attributes.listPrice >= this.minPrice && home.attributes.listPrice <= this.maxPrice && home.attributes.property.bedrooms >= this.bedrooms && home.attributes.property.bathsFull >= this.baths && home.attributes.property.area >= this.minSq && home.attributes.property.area <= this.maxSq;
-		}).bind(this));
-	},
-
-	toJSON: function toJSON() {
-		return _.extend({}, this.attributes, this.isUser);
-	}
-
-});
-
-exports['default'] = { HomeCollection: HomeCollection };
-module.exports = exports['default'];
-  
-});
-
-require.register("models/location", function(exports, require, module){
-  'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-var SearchLocation = Backbone.Model.extend({
-
-	defaults: {
-		address: '77002'
-	},
-
-	urlRoot: 'https://maps.googleapis.com/maps/api/geocode/json',
-	url: function url() {
-		return this.urlRoot + '?address=' + this.get('address') + '&components=locality&components=postal_code&key=AIzaSyAa8ybQRvx0M-3HYRgivQXBauKFFLVr6HI';
-		// console.log(this.urlRoot + params.params.locale);
-		// return this.urlRoot + params.params.locale;
-	}
-
-});
-
-exports['default'] = { SearchLocation: SearchLocation };
-module.exports = exports['default'];
-  
-});
-
-require.register("models/schools", function(exports, require, module){
-  'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-var SchoolCollection = Backbone.Collection.extend({
-
-	url: function url() {
-		return 'http://localhost:5000/great/' + this.zipcode;
-	},
-
-	initialize: function initialize(options) {
-		this.zipcode = options.zipcode;
-	}
-
-});
-
-exports['default'] = { SchoolCollection: SchoolCollection };
-module.exports = exports['default'];
-  
-});
-
-require.register("models/users", function(exports, require, module){
-  'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-var User = Backbone.Model.extend({
-
-	idAttribute: 'objectId',
-	urlRoot: 'https://api.parse.com/1/user',
-	defaults: {
-		name: '',
-		username: '',
-		password: '',
-		homes: [],
-		filters: { minPrice: 0, maxPrice: 1000000000, bedrooms: 0, baths: 0, minSq: 0, maxSq: 1000000 }
-	}
-
-});
-
-var UserCollection = Backbone.Collection.extend({
-
-	model: User,
-	url: 'https://api.parse.com/1/user'
-
-});
-
-exports['default'] = { User: User, UserCollection: UserCollection };
-module.exports = exports['default'];
-  
-});
-
 require.register("views/census", function(exports, require, module){
   'use strict';
 
@@ -784,7 +648,7 @@ exports['default'] = Backbone.View.extend({
 		this.search.fetch().then((function (data) {
 			this.search.set('lat', data.results[0].geometry.location.lat);
 			this.search.set('lng', data.results[0].geometry.location.lng);
-			console.log(this.search);
+			// console.log(this.search);
 			this.rerender();
 		}).bind(this));
 	},
@@ -827,7 +691,7 @@ exports['default'] = Backbone.View.extend({
 			minSq: minSq,
 			maxSq: maxSq
 		};
-		console.log(updatedFilters);
+		// console.log(updatedFilters);
 		Parse.User.current().set('filters', updatedFilters);
 		Parse.User.current().save();
 	},
@@ -850,12 +714,12 @@ exports['default'] = Backbone.View.extend({
 		var password = this.$('.login-password').val();
 		Parse.User.logIn(username, password, {
 			success: function success(user) {
-				console.log(user);
+				// console.log(user);
 				_router2['default'].navigate('#users', true);
 			},
 			error: function error(user, _error) {
 				alert('Error: Invalid username or password.');
-				console.log(_error);
+				// console.log(error);
 			}
 		});
 	},
@@ -876,14 +740,14 @@ exports['default'] = Backbone.View.extend({
 		user.set('filters', { minPrice: 0, maxPrice: 1000000000, bedrooms: 0, baths: 0, minSq: 0, maxSq: 1000000 });
 		user.signUp(null, {
 			success: function success(user) {
-				console.log(user);
+				// console.log(user);
 				Parse.User.become(user.sessionToken).then(function (user) {
 					_router2['default'].navigate('#users', true);
 				});
 			},
 			error: function error(user, _error2) {
 				alert('Error: registration unsuccessful due to: ' + _error2.message);
-				console.log(_error2.message);
+				// console.log(error.message);
 			}
 		});
 	},
@@ -1714,7 +1578,7 @@ exports['default'] = Backbone.View.extend({
 			Parse.User.current().save();
 			this.model.set('isSaved', false);
 			this.render();
-			console.log(Parse.User.current());
+			// console.log(Parse.User.current());
 		} else {
 			var mlsId = this.model.get('mlsId');
 			var address = this.model.get('address');
@@ -1732,7 +1596,7 @@ exports['default'] = Backbone.View.extend({
 			Parse.User.current().set('homes', savedHomes.concat([newHome]));
 			Parse.User.current().save();
 			this.render();
-			console.log(Parse.User.current());
+			// console.log(Parse.User.current());
 		}
 	},
 
@@ -1900,7 +1764,7 @@ exports['default'] = Backbone.View.extend({
 	initialize: function initialize() {
 		this.render();
 		this.listenTo(this.model, 'update add remove', this.render);
-		console.log(this.model.get('homes'));
+		// console.log(this.model.get('homes'));
 	},
 
 	render: function render() {
@@ -1930,10 +1794,146 @@ exports['default'] = Backbone.View.extend({
 		console.log(updatedFilters);
 		Parse.User.current().set('filters', updatedFilters);
 		Parse.User.current().save();
-		console.log(Parse.User.current());
+		// console.log(Parse.User.current());
 	}
 
 });
+module.exports = exports['default'];
+  
+});
+
+require.register("models/censusCollection", function(exports, require, module){
+  "use strict";
+  
+});
+
+require.register("models/demographicsCollection", function(exports, require, module){
+  'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+var DemographicsCollection = Backbone.Collection.extend({
+
+	url: function url() {
+		return 'http://localhost:5000/demo/' + this.zipcode;
+	},
+
+	initialize: function initialize(options) {
+		this.zipcode = options.zipcode;
+	}
+
+});
+
+exports['default'] = { DemographicsCollection: DemographicsCollection };
+module.exports = exports['default'];
+  
+});
+
+require.register("models/homes", function(exports, require, module){
+  'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+var HomeCollection = Backbone.Collection.extend({
+
+	url: 'https://jsonp.afeld.me/?callback=?&url=https://simplyrets:simplyrets@api.simplyrets.com/properties',
+
+	filteredCollection: function filteredCollection(collection) {
+		return collection.filter((function (home) {
+			return home.attributes.listPrice >= this.minPrice && home.attributes.listPrice <= this.maxPrice && home.attributes.property.bedrooms >= this.bedrooms && home.attributes.property.bathsFull >= this.baths && home.attributes.property.area >= this.minSq && home.attributes.property.area <= this.maxSq;
+		}).bind(this));
+	},
+
+	toJSON: function toJSON() {
+		return _.extend({}, this.attributes, this.isUser);
+	}
+
+});
+
+exports['default'] = { HomeCollection: HomeCollection };
+module.exports = exports['default'];
+  
+});
+
+require.register("models/location", function(exports, require, module){
+  'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+var SearchLocation = Backbone.Model.extend({
+
+	defaults: {
+		address: '77002'
+	},
+
+	urlRoot: 'https://maps.googleapis.com/maps/api/geocode/json',
+	url: function url() {
+		return this.urlRoot + '?address=' + this.get('address') + '&components=locality&components=postal_code&key=AIzaSyAa8ybQRvx0M-3HYRgivQXBauKFFLVr6HI';
+		// console.log(this.urlRoot + params.params.locale);
+		// return this.urlRoot + params.params.locale;
+	}
+
+});
+
+exports['default'] = { SearchLocation: SearchLocation };
+module.exports = exports['default'];
+  
+});
+
+require.register("models/schools", function(exports, require, module){
+  'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+var SchoolCollection = Backbone.Collection.extend({
+
+	url: function url() {
+		return 'http://localhost:5000/great/' + this.zipcode;
+	},
+
+	initialize: function initialize(options) {
+		this.zipcode = options.zipcode;
+	}
+
+});
+
+exports['default'] = { SchoolCollection: SchoolCollection };
+module.exports = exports['default'];
+  
+});
+
+require.register("models/users", function(exports, require, module){
+  'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+var User = Backbone.Model.extend({
+
+	idAttribute: 'objectId',
+	urlRoot: 'https://api.parse.com/1/user',
+	defaults: {
+		name: '',
+		username: '',
+		password: '',
+		homes: [],
+		filters: { minPrice: 0, maxPrice: 1000000000, bedrooms: 0, baths: 0, minSq: 0, maxSq: 1000000 }
+	}
+
+});
+
+var UserCollection = Backbone.Collection.extend({
+
+	model: User,
+	url: 'https://api.parse.com/1/user'
+
+});
+
+exports['default'] = { User: User, UserCollection: UserCollection };
 module.exports = exports['default'];
   
 });
