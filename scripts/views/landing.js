@@ -50,7 +50,7 @@ export default Backbone.View.extend({
 					HTML: 'HTML5', 
 					CSS: ['SCSS', 'Bourbon', 'Neat'],
 					RestfulAPIs: ['Parse.com', 'Education.com', 'GeoDataService.net', 'SimplyRETS.com', 'GreatSchools.org'],
-					otherResources: ['GeoLocation Services', 'Google Maps', ]
+					otherResources: ['GeoLocation Services', 'Google Maps', 'Google GeoCoding API']
 				});
 	},
 
