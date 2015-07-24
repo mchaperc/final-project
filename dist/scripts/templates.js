@@ -98,7 +98,7 @@ this["JST"]["listing"] = Handlebars.template({"1":function(depth0,helpers,partia
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
-  return "<div class=\"screen\">\n<header class=\"listing-header\">\n	<div class=\"listing-header-branding\">\n		<i class=\"fa fa-graduation-cap\"></i><h3 class=\"listing-header-branding-content\"> The Educated Homebuyer</h3>\n	</div>\n	<ul class=\"listing-header-nav\">\n		<a href=\"#\"><li class=\"listing-header-nav-links\"><i class=\"fa fa-home\"></i> <span>Home</span></li></a>\n"
+  return "<div class=\"screen\">\n<header class=\"listing-header\">\n	<a href=\"#\">\n	<div class=\"listing-header-branding\">\n		<i class=\"fa fa-graduation-cap\"></i><h3 class=\"listing-header-branding-content\"> The Educated Homebuyer</h3>\n	</div>\n	</a>\n	<ul class=\"listing-header-nav\">\n		<a href=\"#\"><li class=\"listing-header-nav-links\"><i class=\"fa fa-home\"></i> <span>Home</span></li></a>\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.isUser : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "	</ul>\n</header>\n<section class=\"listing-content\">\n	<section class=\"listing-info\">\n		<div class=\"listing-info-images\">\n			<i class=\"fa fa-chevron-right\"></i>\n			<i class=\"fa fa-chevron-left\"></i>\n			<img class=\"listing-info-images-image\" src=\""
     + alias2(alias1((depth0 != null ? depth0.currentPhoto : depth0), depth0))
@@ -183,7 +183,7 @@ this["JST"]["user"] = Handlebars.template({"1":function(depth0,helpers,partials,
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
-  return "<div class=\"screen\">\n<header class=\"user-header\">\n	<div class=\"user-header-branding\">\n		<i class=\"fa fa-graduation-cap fa-2x\"></i>\n		<h3 class=\"user-header-branding-text\">The Educated Homebuyer</h3>\n	</div>\n	<h3 class=\"user-header-greeting\">Welcome, "
+  return "<div class=\"screen\">\n<header class=\"user-header\">\n	<a href=\"#\">\n	<div class=\"user-header-branding\">\n		<i class=\"fa fa-graduation-cap fa-2x\"></i>\n		<h3 class=\"user-header-branding-text\">The Educated Homebuyer</h3>\n	</div>\n	</a>\n	<h3 class=\"user-header-greeting\">Welcome, "
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "!</h3>\n	<ul class=\"user-header-nav\">\n		<li class=\"user-header-nav-link\"><a href=\"#\">Home</a></li> |<li class=\"user-header-nav-link\"><button class=\"user-header-logout\">Logout</button></li>\n	</ul>\n</header>\n\n<section class=\"user-saved-homes\">\n	<h3 class=\"user-saved-homes-heading\">Saved Homes:</h3>\n	<ul class=\"user-saved-homes-list\">\n		<a href=\"\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.homes : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")

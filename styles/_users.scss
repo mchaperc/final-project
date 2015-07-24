@@ -26,6 +26,14 @@
 	margin-top: 2em;
 }
 
+a .user-header-branding {
+	color: white;
+}
+
+a .user-header-branding:visited {
+	color: white;
+}
+
 .user-header-branding {
 	@include span-columns(3);
 	@include shift(.5);

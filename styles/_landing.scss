@@ -53,6 +53,22 @@
 	width: 100%;
 }
 
+.hide-me-mobile {
+	width: 5% !important;
+}
+
+.hide-description-mobile {
+	opacity: 0;
+}
+
+.hide-me-comp {
+	width: 2.5% !important;
+}
+
+.hide-description-comp {
+	opacity: 0;
+}
+
 .site-nav-item:nth-child(3) {
 	background-color: $green;
 }

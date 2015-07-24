@@ -161,6 +161,7 @@ export default Backbone.View.extend({
 		// filters if requested by the user.
 
 		this.collection = this.originalCollection.clone();
+
 	},
 
 	// remove: function(){

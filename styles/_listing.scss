@@ -26,6 +26,14 @@
 	width: 75%;
 }
 
+a .listing-header-branding {
+	color: black;
+}
+
+a .listing-header-branding:visited {
+	color: black;
+}
+
 .listing-header-branding {
 	@include span-columns(4);
 	@include shift(1);
@@ -37,7 +45,7 @@
 
 .listing-header-branding .fa {
 	margin-left: .5em;
-	margin-top: .8em;
+	margin-top: 1em;
 }
 
 .listing-header-branding-content {
