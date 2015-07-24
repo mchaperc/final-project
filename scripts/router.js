@@ -49,14 +49,11 @@ var Router = Backbone.Router.extend({
 				$('.sk-circle').remove();
 				$('#app').append(this.landingView.el);
 				if(localStorage.getItem('visited') == 'true') {
-		    		console.log('visited');
 					if(window.innerWidth < 980) {
-						console.log('mobile');
 						$('.site-nav-item:nth-child(2)').addClass('hide-me-mobile');
 			 			$('.site-nav-item-branding').addClass('hide-description-mobile');
 			 			$('.site-nav-item:nth-child(2)').children().addClass('hide-description-mobile');
 			    	} else {
-			    		console.log('comp');
 			    		$('.site-nav-item:nth-child(2)').addClass('hide-me-comp');
 			    		$('.site-nav-item:nth-child(2)').children().addClass('hide-description-comp');
 			    	}
