@@ -1,7 +1,7 @@
 var SchoolCollection = Backbone.Collection.extend({
 
 	url: function() {
-		return 'http://localhost:5000/great/' + this.zipcode;
+		return 'http://afternoon-ocean-5057.heroku-app.com/great/' + this.zipcode;
 	},
 	
 	initialize: function(options) {
