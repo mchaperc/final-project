@@ -240,30 +240,30 @@ export default Backbone.View.extend({
 		this.$el.append(this.PopUp.el);
 	},
 
-	logIn: function() {
+	logIn: function(e) {
 
 		// Functionality for taking user inputs and attempting to log in via Parse. If successful,
 		// the user is redirected to his/her profile. If unsuccessful, an error message is alerted.
-
+		e.preventDefault();
 		var username = this.$('.login-email').val();
 		var password = this.$('.login-password').val();
+		console.log('username: ', username, 'password: ', password);
 		Parse.User.logIn(username, password, {
 		  success: function(user) {
-		    // console.log(user);
 			router.navigate('#users', true);
 		  },
 		  error: function(user, error) {
 		    alert('Error: Invalid username or password.');
-		    // console.log(error);
+		    console.log(user, error);
 		  }
 		});
 	},
 
-	createUser: function() {
+	createUser: function(e) {
 
 		// Functionality for taking user inputs and creating a new user on Parse. If successful, the
 		// the user is redirected to a profile page. If unsuccessful, an error message is alerted.
-
+		e.preventDefault();
 		var name = this.$('.register-name').val();
 		var username = this.$('.register-email').val();
 		var password = this.$('.register-password').val();
