@@ -13,7 +13,7 @@
 
 .screen {
 	background-color: rgba(50,50,50,.6);
-	height: 100%;
+	height: 100vh;
 }
 
 .user-header {
@@ -265,7 +265,6 @@ a .user-saved-homes-item:hover {
 		@include shift(.5);
 	}
 	.screen {
-		overflow: scroll;
 		padding-bottom: 1em;
 	}
 }
