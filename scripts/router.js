@@ -28,9 +28,9 @@ var Router = Backbone.Router.extend({
 		$('#app').addClass('landing');
 		var loadingView = new LoadingView();
 		$('#app').html(loadingView.el);
-		this.myLocation = new Promise(function(resolve, reject) { 
-  			navigator.geolocation.getCurrentPosition(resolve, reject);
-		});
+		// this.myLocation = new Promise(function(resolve, reject) { 
+  // 			navigator.geolocation.getCurrentPosition(resolve, reject);
+		// });
 		Promise.resolve(this.myLocation).then(function(value) {
 			this.homes.fetch().then(function(data) {
 				var searchLocation = new SearchLocation(value);

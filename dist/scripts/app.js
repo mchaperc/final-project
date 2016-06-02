@@ -99,9 +99,9 @@ var Router = Backbone.Router.extend({
 		$('#app').addClass('landing');
 		var loadingView = new _viewsLoading2['default']();
 		$('#app').html(loadingView.el);
-		this.myLocation = new Promise(function (resolve, reject) {
-			navigator.geolocation.getCurrentPosition(resolve, reject);
-		});
+		// this.myLocation = new Promise(function(resolve, reject) {
+		// 			navigator.geolocation.getCurrentPosition(resolve, reject);
+		// });
 		Promise.resolve(this.myLocation).then((function (value) {
 			this.homes.fetch().then((function (data) {
 				var searchLocation = new _modelsLocation.SearchLocation(value);
@@ -1726,24 +1726,24 @@ exports['default'] = Backbone.View.extend({
 			this.render();
 			// console.log(Parse.User.current());
 		} else {
-			var mlsId = this.model.get('mlsId');
-			var address = this.model.get('address');
-			address = address.full + ', ' + address.city + ', ' + 'TX';
-			var price = this.model.get('listPrice');
-			var image = this.model.get('photos');
-			image = image[0];
-			var newHome = {
-				mlsId: mlsId,
-				address: address,
-				price: price,
-				image: image
-			};
-			var savedHomes = Parse.User.current().get('homes');
-			Parse.User.current().set('homes', savedHomes.concat([newHome]));
-			Parse.User.current().save();
-			this.render();
-			// console.log(Parse.User.current());
-		}
+				var mlsId = this.model.get('mlsId');
+				var address = this.model.get('address');
+				address = address.full + ', ' + address.city + ', ' + 'TX';
+				var price = this.model.get('listPrice');
+				var image = this.model.get('photos');
+				image = image[0];
+				var newHome = {
+					mlsId: mlsId,
+					address: address,
+					price: price,
+					image: image
+				};
+				var savedHomes = Parse.User.current().get('homes');
+				Parse.User.current().set('homes', savedHomes.concat([newHome]));
+				Parse.User.current().save();
+				this.render();
+				// console.log(Parse.User.current());
+			}
 	},
 
 	toProfile: function toProfile() {

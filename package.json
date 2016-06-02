@@ -18,6 +18,6 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.5",
     "gulp-wrap": "^0.11.0",
-    "gulp-wrap-commonjs": "git://github.com/jacobthemyth/gulp-wrap-commonjs.git"
+    "gulp-wrap-commonjs": "git://github.com/mchaperc/gulp-wrap-commonjs.git"
   }
 }
