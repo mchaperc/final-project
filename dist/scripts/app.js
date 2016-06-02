@@ -99,39 +99,39 @@ var Router = Backbone.Router.extend({
 		$('#app').addClass('landing');
 		var loadingView = new _viewsLoading2['default']();
 		$('#app').html(loadingView.el);
-		this.myLocation = new Promise(function (resolve, reject) {
-			navigator.geolocation.getCurrentPosition(resolve, reject);
-		});
-		Promise.resolve(this.myLocation).then((function (value) {
-			this.homes.fetch().then((function (data) {
-				var searchLocation = new _modelsLocation.SearchLocation(value);
-				if (Parse.User.current()) {
-					var user = new _modelsUsers.User();
-					this.landingView = new _viewsLanding2['default']({ collection: this.homes,
-						search: searchLocation,
-						user: user }, { isUser: true });
+		// this.myLocation = new Promise(function(resolve, reject) {
+		// navigator.geolocation.getCurrentPosition(resolve, reject);
+		// });
+		// Promise.resolve(this.myLocation).then(function(value) {
+		this.homes.fetch().then((function (data) {
+			var searchLocation = new _modelsLocation.SearchLocation();
+			if (Parse.User.current()) {
+				var user = new _modelsUsers.User();
+				this.landingView = new _viewsLanding2['default']({ collection: this.homes,
+					search: searchLocation,
+					user: user }, { isUser: true });
+			} else {
+				var users = new _modelsUsers.UserCollection();
+				this.landingView = new _viewsLanding2['default']({ collection: this.homes,
+					search: searchLocation,
+					users: users }, { isUser: false });
+			}
+			$('.sk-circle').remove();
+			$('#app').append(this.landingView.el);
+			if (localStorage.getItem('visited') == 'true') {
+				if (window.innerWidth < 980) {
+					$('.site-nav-item:nth-child(2)').addClass('hide-me-mobile');
+					$('.site-nav-item-branding').addClass('hide-description-mobile');
+					$('.site-nav-item:nth-child(2)').children().addClass('hide-description-mobile');
 				} else {
-					var users = new _modelsUsers.UserCollection();
-					this.landingView = new _viewsLanding2['default']({ collection: this.homes,
-						search: searchLocation,
-						users: users }, { isUser: false });
+					$('.site-nav-item:nth-child(2)').addClass('hide-me-comp');
+					$('.site-nav-item:nth-child(2)').children().addClass('hide-description-comp');
 				}
-				$('.sk-circle').remove();
-				$('#app').append(this.landingView.el);
-				if (localStorage.getItem('visited') == 'true') {
-					if (window.innerWidth < 980) {
-						$('.site-nav-item:nth-child(2)').addClass('hide-me-mobile');
-						$('.site-nav-item-branding').addClass('hide-description-mobile');
-						$('.site-nav-item:nth-child(2)').children().addClass('hide-description-mobile');
-					} else {
-						$('.site-nav-item:nth-child(2)').addClass('hide-me-comp');
-						$('.site-nav-item:nth-child(2)').children().addClass('hide-description-comp');
-					}
-				} else {
-					localStorage.setItem('visited', true);
-				}
-			}).bind(this));
+			} else {
+				localStorage.setItem('visited', true);
+			}
 		}).bind(this));
+		// }.bind(this));
 	},
 
 	users: function users() {
